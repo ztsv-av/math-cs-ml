@@ -1,9 +1,10 @@
+# for testing
 array = [1, 5, -13, -5, 0, 99, 85, 17, 25, 5, 6, 9, 101, 55, 13, 17, 99, 56, 76, 4]
 
 def selectionSort(array):
 
     """
-    The selection sort algorithm sorts an array 
+    Selection sort algorithm sorts an array 
     by repeatedly finding the minimum element 
     (considering ascending order) from unsorted part 
     and putting it at the beginning.
@@ -16,11 +17,6 @@ def selectionSort(array):
     parameters
     ----------
     array : unsorted array
-
-    returns
-    ----------
-    array : =/=
-        sorted array
     """
 
     for i in range(len(array) - 1):
@@ -51,11 +47,6 @@ def insertionSort(array):
     parameters
     ----------
     array : unsorted array
-
-    returns
-    ----------
-    array : =/=
-        sorted array
     """
 
     for i in range(1, len(array)):
@@ -95,6 +86,7 @@ def insertionSortInterleaved(array, startIdx, gap):
             j = j - gap
 
 def shellSort(array, gapValues):
+
     """
     Shell sort method starts by sorting pairs of elements 
     far apart from each other, then progressively reducing
@@ -120,11 +112,6 @@ def shellSort(array, gapValues):
             in decreasing order. 1 should be the last value.
         The sum of gapValues is the number of times
         insertionSortInterleaved is called.
-
-    returns
-    ----------
-    array : =/=
-        sorted array
     """
 
     for gapValue in gapValues:
@@ -132,5 +119,107 @@ def shellSort(array, gapValues):
         for startIdx in range(gapValue):
             
             insertionSortInterleaved(array, startIdx, gapValue)
-        
-    return array
+
+def partition(array, startIdx, endIdx):
+
+    """
+    Helper function for Quick sort algorithm
+
+    parameters
+    ----------
+    array : array
+        unsorted array
+    startIdx : integer
+        index of a value from which to start
+        sorting algorithm
+    endIdx : integer
+        index of a value after which not to use
+        sorting algorithm
+
+    returns
+    ----------
+    high : integer
+        last index in left partition segment 
+    """
+    # Select the middle value as the pivot.
+    midpoint = startIdx + (endIdx - startIdx) // 2
+    pivot = array[midpoint]
+   
+    # "low" and "high" start at the ends of the list segment
+    # and move towards each other.
+    low = startIdx
+    high = endIdx
+   
+    done = False
+    while not done:
+        # Increment low while array[low] < pivot
+        while array[low] < pivot:
+            low = low + 1
+      
+        # Decrement high while pivot < array[high]
+        while pivot < array[high]:
+            high = high - 1
+      
+        # If low and high have crossed each other, the loop
+        # is done. If not, the elements are swapped, low is
+        # incremented and high is decremented.
+        if low >= high:
+            done = True
+
+        else:
+            temp = array[low]
+            array[low] = array[high]
+            array[high] = temp
+
+            low = low + 1
+            high = high - 1
+   
+    # "high" is the last index in the left segment.
+    return high
+
+def quickSort(array, startIdx, endIdx):
+    
+    """
+    Quick sort picks an element as pivot and partitions 
+    the given array around the picked pivot. The key process 
+    in quickSort is partition(). Target of partitions is, 
+    given an array and an element x of array as pivot, 
+    put x at its correct position in sorted array and 
+    put all smaller elements (smaller than x) before x, 
+    and put all greater elements (greater than x) after x.
+    Once partitioned, each partition needs to be sorted. 
+    Quicksort is typically implemented as a recursive algorithm 
+    using calls to quicksort to sort the low and high partitions. 
+    This recursive sorting process continues until a partition has 
+    one or zero elements, and thus is already sorted.
+
+    Worst complexity: n^2
+    Average complexity: n*log(n)
+    Best complexity: n*log(n)
+    Space complexity: 1
+
+    parameters
+    ----------
+    array : array
+        unsorted array
+    startIdx : integer
+        index of a value from which to start
+        sorting algorithm
+    endIdx : integer
+        index of a value after which not to use
+        sorting algorithm
+    """
+
+    # Only attempt to sort the list segment if there are
+    # at least 2 elements
+    if endIdx <= startIdx:
+        return
+          
+    # Partition the list segment
+    high = partition(array, startIdx, endIdx)
+
+    # Recursively sort the left segment
+    quickSort(array, startIdx, high)
+
+    # Recursively sort the right segment
+    quickSort(array, high + 1, endIdx)
