@@ -1,2 +1,2 @@
-# info
+# Information
 Useful information for deep learning and computer science
