@@ -1,5 +1,5 @@
 # for testing
-array = [1, 5, -13, -5, 0, 99, 85, 17, 25, 5, 6, 9, 101, 55, 13, 17, 99, 56, 76, 4]
+array = [1, 5, -13, -5, 0, 99, 85, 17, 25, -66, 5, 6, 9, 101, 55, 13, 17, 99, 56, 76, 4, -101, 1000, -1000]
 
 def selectionSort(array):
 
@@ -203,11 +203,9 @@ def quickSort(array, startIdx, endIdx):
     array : array
         unsorted array
     startIdx : integer
-        index of a value from which to start
-        sorting algorithm
+        index from which to start sorting algorithm
     endIdx : integer
-        index of a value after which not to use
-        sorting algorithm
+        index where to end sorting algorithm
     """
 
     # Only attempt to sort the list segment if there are
@@ -223,3 +221,169 @@ def quickSort(array, startIdx, endIdx):
 
     # Recursively sort the right segment
     quickSort(array, high + 1, endIdx)
+
+def merge(array, startIdx, midIdx, endIdx):
+
+    """
+    Helper function for Merge sort algorithm
+
+    parameters
+    ----------
+    array : array
+        unsorted array
+    startIdx : integer
+        the start index of the first sorted partition
+    midIdx : integer
+        the end index of the first sorted partition
+    endIdx : integer
+        the end index of the second sorted partition
+    """
+
+    merged_size = endIdx - startIdx + 1     # Size of merged partition
+    merged_array = [0] * merged_size        # Dynamically allocates temporary array
+                                            # for merged array
+    merge_pos = 0                           # Position to insert merged number
+    left_pos = startIdx                     # Initialize left partition start position
+    right_pos = midIdx + 1                  # Initialize right partition start position
+   
+    # Add smallest element from left or right partition to merged array
+    while left_pos <= midIdx and right_pos <= endIdx:
+        if array[left_pos] <= array[right_pos]:
+            merged_array[merge_pos] = array[left_pos]
+            left_pos += 1
+        else:
+            merged_array[merge_pos] = array[right_pos]
+            right_pos += 1
+        merge_pos += 1
+   
+    # If left partition is not empty, add remaining elements to merged array
+    while left_pos <= midIdx:
+        merged_array[merge_pos] = array[left_pos]
+        left_pos += 1
+        merge_pos += 1
+   
+    # If right partition is not empty, add remaining elements to merged array
+    while right_pos <= endIdx:
+        merged_array[merge_pos] = array[right_pos]
+        right_pos = right_pos + 1
+        merge_pos = merge_pos + 1
+   
+    # Copy merge number back to array
+    for merge_pos in range(merged_size):
+        array[startIdx + merge_pos] = merged_array[merge_pos]
+
+def mergeSort(array, startIdx, endIdx):
+        
+    """
+    Merge sort is a sorting algorithm that divides 
+    a list into two halves, recursively sorts each half, 
+    and then merges the sorted halves to produce a sorted list.
+
+    Worst complexity: n*log(n)
+    Average complexity: n*log(n)
+    Best complexity: n*log(n)
+    Space complexity: n
+
+    parameters
+    ----------
+    array : array
+        unsorted array
+    startIdx : integer
+        index from which to start sorting algorithm
+    endIdx : integer
+        index where to end sorting algorithm
+    """
+
+    if startIdx < endIdx:
+        midIdx = (startIdx + endIdx) // 2  # Find the midpoint in the partition
+
+        # Recursively sort left and right partitions
+        mergeSort(array, startIdx, midIdx)
+        mergeSort(array, midIdx + 1, endIdx)
+            
+        # Merge left and right partition in sorted order
+        merge(array, startIdx, midIdx, endIdx)
+
+# Returns the maximum length, in number of digits, out of all list elements 
+def radixGetMaxLength(array):
+
+    """
+    Helper function for radixSort.
+    Finds the longest digit in an array.
+
+    parameters
+    ----------
+    array : array
+        unsorted array
+    
+    returns
+    -------
+    max_digits : =/=
+        maximum lenght of a digit 
+        in an array
+    """
+
+    max_digits = 0
+
+    for value in array:
+        digit_count = len(str(value))
+
+        if digit_count > max_digits:
+            max_digits = digit_count
+        
+    return max_digits
+
+def radixSort(array):
+        
+    """
+    The radix sort algorithm sorts a list of integers 
+    by grouping elements based on the element's digits, 
+    starting with the least significant digit and ending with 
+    the most significant. Two steps are needed for each digit. 
+    First, all list elements are placed into buckets based 
+    on the current digit's value. Then, the list is rebuilt 
+    by removing all elements from buckets, in order from lowest 
+    bucket to highest.
+
+    Worst complexity: n*k/d
+    Average complexity: n*k/d
+    Space complexity: n+2^d
+
+    parameters
+    ----------
+    array : array
+        unsorted array
+    """
+
+    buckets = [[] for i in range(10)]
+
+    # Find the max length, in number of digits
+    max_digits = radixGetMaxLength(array)
+        
+    pow_10 = 1
+    for digitIdx in range(max_digits):
+
+        for num in array:
+            bucket_index = (num // pow_10) % 10
+            buckets[bucket_index].append(num)
+
+        array.clear()
+
+        for bucket in buckets:
+            array.extend(bucket)
+            bucket.clear()
+      
+        pow_10 = pow_10 * 10
+   
+    negatives = []
+    positives = []
+
+    for num in array:
+
+        if num < 0:
+            negatives.append(num)
+        else:
+            positives.append(num)
+
+    array.clear()
+    array.extend(negatives + positives)
