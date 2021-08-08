@@ -1,0 +1,192 @@
+# Structured Query Language(SQL) as we all know is the database language by
+#   the use of which we can perform certain operations on the existing database 
+#   and also we can use this language to create a database. SQL uses certain commands 
+#   like Create, Drop, Insert, etc. to carry out the required tasks. 
+
+# Entity - table
+# Attribute - column
+# Record - row
+# Relationship - association between entities
+# Primary key:
+#   unique identifier for a table
+#   cannot be NULL
+#   a table can have only one primary key
+#   all columns in table are functionally dependent on A
+# Foreign key:
+#   primary key in another table
+# Bridge / Linking table:
+#   table that connects other tables
+#   used to create one-many relationships instead of many-to-many
+# one-to-many relationship:
+#   one 'student' is related to many 'classes'
+#   implement by having a common column in two or more tables
+#   e.x.: 'STUDENT_ID' is a column in 'CLASSES' table and 'STUDENT_DATA' table
+
+# Operators
+# A traditional set of operators exists for the SQL, as follows:
+#   != (not equal to)
+#   = (equal to)
+#   < (less than)
+#   > (greater than)
+#   <= (less than or equal to)
+#   >= (greater than or equal to)
+
+# Operators can work on both text and numerical data. 
+# Similarly, a standard set of mathematical functions exist for the SQL, 
+# but the following functions only work against numerical data elements:
+#   + (add)
+#   – (subtract)
+#   / (divide)
+#   * (multiply)
+
+# Logical Comparison Operators
+# A traditional set of logical comparison operators exists for the SQL, as follows:
+#   AND
+#   OR
+#   NOT
+
+# These SQL commands are mainly categorized into four (five) categories as: 
+#   DDL – Data Definition Language
+#   DQl – Data Query Language
+#   DML – Data Manipulation Language
+#   DCL – Data Control Language
+#   *TCL - Transaction Control Language
+
+# 1. DDL(Data Definition Language) : DDL or Data Definition Language actually consists 
+#   of the SQL commands that can be used to define the database schema. It simply 
+#   deals with descriptions of the database schema and is used to create and modify 
+#   the structure of database objects in the database.
+
+# Examples of DDL commands: 
+#   CREATE – is used to create the database or its objects (like table, index, function, views, store procedure and triggers).
+#   DROP – is used to delete objects from the database.
+#   ALTER-is used to alter the structure of the database.
+#   TRUNCATE–is used to remove all records from a table, including all spaces allocated for the records are removed.
+#   COMMENT –is used to add comments to the data dictionary.
+#   RENAME –is used to rename an object existing in the database.
+
+# 2. DQL (Data Query Language) :
+
+# DQL statements are used for performing queries on the data within schema objects. 
+# The purpose of the DQL Command is to get some schema relation based on the query passed to it. 
+
+# Example of DQL: 
+#   SELECT – is used to retrieve data from the database.
+#   INSERT
+#   UPDATE
+#   DELETE
+
+# 3. DML(Data Manipulation Language): The SQL commands that deals with the manipulation 
+# of data present in the database belong to DML or Data Manipulation Language and this 
+# includes most of the SQL statements. 
+
+# Examples of DML: 
+#   INSERT – is used to insert data into a table.
+#    UPDATE – is used to update existing data within a table.
+#    DELETE – is used to delete records from a database table.
+
+# 4. DCL(Data Control Language): DCL includes commands such as GRANT and REVOKE 
+# which mainly deal with the rights, permissions and other controls of the database system. 
+
+# Examples of DCL commands: 
+#   GRANT-gives users access privileges to the database.
+#   REVOKE-withdraw user’s access privileges given by using the GRANT command.
+
+# 5. TCL(transaction Control Language): TCL commands deal with the transaction within the database. 
+
+# Examples of TCL commands: 
+#   COMMIT– commits a Transaction.
+#   ROLLBACK– rollbacks a transaction in case of any error occurs.
+#   SAVEPOINT–sets a savepoint within a transaction.
+#   SET TRANSACTION–specify characteristics for the transaction.
+
+# NORMALIZATION
+# Normal forms are further described as follows:
+#   1NF: This basically states that you must eliminate any duplicate columns within the same table. 
+#       Another aspect of this standard is that separate tables should be created for each group of related data, 
+#       and each record should have a unique column for the primary key.
+#   2NF: This must meet the requirements of 1NF. In this process, you must also develop relationships between 
+#       the tables normalized in 1NF and implement the use of foreign keys.
+#   3NF: This must meet the requirements of 2NF. The new addition in this standard is to eliminate columns 
+#       that are not dependent on the table’s primary key.
+#   4NF: This must meet the requirements of 3NF. The only update to this standard that is different from 
+#       the first three standards is that the table cannot contain more than one multivalued dependency.
+#   5NF: This must meet the requirements of 4NF. It deals with a theory called join dependency.
+
+# DATA TYPES:
+
+#  | BIT(length)
+
+#  | TINYINT(length) UNSIGNED ZEROFILL
+
+#  | SMALLINT(length) UNSIGNED ZEROFILL
+
+#  | MEDIUMINT(length) UNSIGNED ZEROFILL
+
+#  | INT(length) UNSIGNED ZEROFILL
+
+#  | INTEGER(length) UNSIGNED ZEROFILL
+
+#  | BIGINT(length) UNSIGNED ZEROFILL
+
+#  | REAL(length,decimals) UNSIGNED ZEROFILL
+
+#  | DOUBLE(length,decimals) UNSIGNED ZEROFILL
+
+#  | FLOAT(length,decimals) UNSIGNED ZEROFILL
+
+#  | DECIMAL(length,decimals) UNSIGNED ZEROFILL
+
+#  | NUMERIC(length,decimals) UNSIGNED ZEROFILL
+
+#  | DATE
+
+#  | TIME(fsp)
+
+#  | TIMESTAMP(fsp)
+
+#  | DATETIME(fsp)
+
+#  | YEAR
+
+#  | CHAR(length) BINARY CHARACTER SET charset_name COLLATE collation_name
+
+#  | VARCHAR(length) BINARY CHARACTER SET charset_name COLLATE collation_name
+
+#  | BINARY(length)
+
+#  | VARBINARY(length)
+
+#  | TINYBLOB
+
+#  | BLOB
+
+#  | MEDIUMBLOB
+
+#  | LONGBLOB
+
+#  | TINYTEXT BINARY CHARACTER SET charset_name COLLATE collation_name
+
+#  | TEXT BINARY CHARACTER SET charset_name COLLATE collation_name
+
+#  | MEDIUMTEXT BINARY CHARACTER SET charset_name COLLATE collation_name
+
+#  | LONGTEXT BINARY CHARACTER SET charset_name COLLATE collation_name
+
+#  | ENUM(value1,value2,value3,...) CHARACTER SET charset_name COLLATE collation_name
+
+#  | SET(value1,value2,value3,...) CHARACTER SET charset_name COLLATE collation_name
+
+#  | JSON          
+
+#  | spatial_type            
+
+# CREATE syntax:
+#   CREATE TABLE TableName(
+#   Fieldname1 datatype properties,
+#   Fieldname2 datatype properties,
+#   Fieldname3 datatype properties,
+#   Fieldname4 datatype properties);
+#   
+#   for primary keys:
+#       Fieldname INT IDENTITY (1,1) #auto numbering property, created automatically
