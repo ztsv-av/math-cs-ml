@@ -254,3 +254,88 @@
     # Lock requests for a table from other sessions are blocked while the WRITE lock is held.
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# WITH statement
+# The SQL WITH clause allows you to give a sub-query block a name (a process also called sub-query refactoring), which can be referenced in several places within the main SQL query.
+    # WITH temporaryTable (averageValue) as
+        # (SELECT avg(Attr1)
+        # FROM Table)
+        # SELECT Attr1
+        # FROM Table, temporaryTable
+        # WHERE Table.Attr1 > temporaryTable.averageValue;
+# In this query, WITH clause is used to define a temporary relation temporaryTable that has only 1 attribute averageValue. 
+# averageValue holds the average value of column Attr1 described in relation Table. 
+# The SELECT statement that follows the WITH clause will produce only those tuples 
+# where the value of Attr1 in relation Table is greater than the average value obtained from the WITH clause statement. 
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# OVER (PARTITION BY)
+# Use PARTITION BY to divide the result set into partitions and perform computation on each subset of partitioned data.
+    # SELECT Customercity, 
+    #        AVG(Orderamount) OVER(PARTITION BY Customercity) AS AvgOrderAmount, 
+    #        MIN(OrderAmount) OVER(PARTITION BY Customercity) AS MinOrderAmount, 
+    #        SUM(Orderamount) OVER(PARTITION BY Customercity) TotalOrderAmount
+    # FROM [dbo].[Orders];
+# Almost the same as:
+    # SELECT Customercity, CustomerName ,OrderAmount,
+    #        AVG(Orderamount) AS AvgOrderAmount, 
+    #        MIN(OrderAmount) AS MinOrderAmount, 
+    #        SUM(Orderamount) TotalOrderAmount
+    # FROM [dbo].[Orders]
+    # GROUP BY Customercity;
+# but it returns all columns (doesn't group columns into 1, returns averages, but as many rows as there are same cities)
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# PIVOT statement
+# Pivot allows users to rotate a table-valued expression by turning the unique values from one column into individual columns.
+# Example:
+# Table (not all data):
+    # Date	        Temp (°F)
+    # 07-22-2018	86
+    # 07-23-2018	90
+    # 07-24-2018	91
+    # 07-25-2018	92
+    # 07-26-2018	92
+    # 07-27-2018	88
+    # 07-28-2018	85
+    # 07-29-2018	94
+    # 07-30-2018	89
+# Code:
+    # SELECT * FROM (
+    #   SELECT year(date) year, month(date) month, temp
+    #   FROM high_temps
+    #   WHERE date BETWEEN DATE '2015-01-01' AND DATE '2018-08-31'
+    # )
+    # PIVOT (
+    #   CAST(avg(temp) AS DECIMAL(4, 1))
+    #   FOR month in (
+    #     1 JAN, 2 FEB, 3 MAR, 4 APR, 5 MAY, 6 JUN,
+    #     7 JUL, 8 AUG, 9 SEP, 10 OCT, 11 NOV, 12 DEC
+    #   )
+    # )
+    # ORDER BY year DESC
+# Result:
+    # YEAR	JAN	    FEB	    MAR	    APR	    MAY	    JUNE	JULY	AUG	    SEPT	OCT	    NOV	    DEC
+    # 2018	49.7	45.8	54.0	58.6	70.8	71.9	82.8	79.1	NULL	NULL	NULL	NULL
+    # 2017	43.7	46.6	51.6	57.3	67.0	72.1	78.3	81.5	73.8	61.1	51.3	45.6
+    # 2016	49.1	53.6	56.4	65.9	68.8	73.1	76.0	79.5	69.6	60.6	56.0	41.9
+    # 2015	50.3	54.5	57.9	59.9	68.0	78.9	82.6	79.0	68.5	63.6	49.4	47.1
+
+# Let’s take a closer look at this query to understand how it works. 
+# First, we need to specify the FROM clause, which is the input of the pivot, in other words, the table or subquery based on which the pivoting will be performed. 
+# In our case, we are concerned about the years, the months, and the high temperatures, so those are the fields that appear in the sub-query.
+# Second, let’s consider another important part of the query, the PIVOT clause. 
+# The first argument of the PIVOT clause is an aggregate function and the column to be aggregated. 
+# We then specify the pivot column in the FOR sub-clause as the second argument, followed by the IN operator containing the pivot column values as the last argument.
+# The pivot column is the point around which the table will be rotated, and the pivot column values will be transposed into columns in the output table. 
+# The IN clause also allows you to specify an alias for each pivot value, making it easy to generate more meaningful column names.
+# An important idea about pivot is that it performs a grouped aggregation based on a list of implicit group-by columns together with the pivot column. 
+# The implicit group-by columns are columns from the FROM clause that do not appear in any aggregate function or as the pivot column.
+# In the above query, with the pivot column being the column month and the implicit group-by column being the column year, 
+# the expression avg(temp) will be aggregated on each distinct value pair of (year, month), where month equals to one of the specified pivot column values. 
+# As a result, each of these aggregated values will be mapped into its corresponding cell of row year and column month.
+# It is worth noting that because of this implicit group-by, 
+# we need to make sure that any column that we do not wish to be part of the pivot output should be left out from the FROM clause, 
+# otherwise the query would produce undesired results.
