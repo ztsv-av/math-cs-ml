@@ -14,6 +14,12 @@
 
 # SELECT statement
 # The SELECT statement is used to select data from a database.
+# A SELECT statement can be used to return information that does not include a table. 
+# For example, you can have SELECT calculate a value and return the value SELECT 27 * 18 from dual. 
+# The DUAL table is a generic table and is optional. The same SELECT statement can be written as SELECT 27*18, and the same value, 486, will be returned.
+# SELECT statements can also include subqueries and UNION statements. 
+# SELECT statements can also be used to populate a table by using a SELECT INTO statement. 
+# The data that are returned will be inserted into a specific table.
 # The data returned is stored in a result table, called the result-set.
 # Example:
     # SELECT expressions
@@ -54,6 +60,30 @@
 # 2	Smith
 # 3	Anderson
 # 4	Jackson
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# WHERE statement
+# The WHERE clause has the ability to select rows based on a Boolean expression. 
+# The rows in which the expression is true are returned in the result. 
+# If it is a DELETE statement, then it is deleted. In an UPDATE statement, it is updated.
+# The WHERE clause has the ability to join or filter predicates. 
+# This can be accomplished as a way to limit the data that are returned by table expressions.
+# Examples:
+    # Where Clause Type                     Example
+    # Simple                                col1 = 3
+    # Text compare                          col1 = 'Car'
+    # Not equal                             col1<> 'Car'
+    # Compare date                          col1 = '2009-11-07'
+    # Multiple values                       col1 in ('Car1','Car2','Car3')
+    # Starts with                           col1 like 'Car%'
+    # Contains                              col1 like '%Car%'
+    # Between two values                    col1 between 0 and 200
+    # Text between                          col1 between 'MARY' and 'SMITH'
+    # Value is present in another table     col1 in (select col2 from another table)
+    # Value is not present in another table col1 not in (select col2 from another table)
+    # Value is null                         col1 is null
+    # Value is not null                     col1 is not null
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -166,6 +196,7 @@
 # CONVERT is also another function:
     # CONVERT(expr USING transcoding_name)
 
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 # DELETE statement
 # It is important to remember that DELETE only works on data and not on any type of database component, 
@@ -288,6 +319,16 @@
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# ORDER BY clause
+# The ORDER BY clause provides a means for allowing the syntax to specify the order of the result set based on an expression in which rows appear in the results.
+    # SELECT expressions
+    # FROM tables
+    # [WHERE conditions]
+    # ORDER BY expression [ ASC | DESC ];
+# Here, ASC - ascending, DESC - descending
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 # PIVOT statement
 # Pivot allows users to rotate a table-valued expression by turning the unique values from one column into individual columns.
 # Example:
@@ -339,3 +380,5 @@
 # It is worth noting that because of this implicit group-by, 
 # we need to make sure that any column that we do not wish to be part of the pivot output should be left out from the FROM clause, 
 # otherwise the query would produce undesired results.
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
