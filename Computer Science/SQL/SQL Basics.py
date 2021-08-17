@@ -112,3 +112,16 @@
 #   4NF: This must meet the requirements of 3NF. The only update to this standard that is different from 
 #       the first three standards is that the table cannot contain more than one multivalued dependency.
 #   5NF: This must meet the requirements of 4NF. It deals with a theory called join dependency.
+
+# Conditional Queries
+# Conditional queries are a form of a subquery, 
+# but they are used in a different manner. 
+# Conditional queries are used either in the WHERE clause or within the actual SELECT clause, 
+# providing different information depending on the value of a column.
+
+# Correlated Subquery
+# If a subquery contains a reference to a table (or tables) named in the main query, 
+# it is called a correlated subquery. 
+# Correlated subqueries are used to evaluate columns in a main query directly against those in a subquery. 
+# Correlation may be used in most subqueries and is necessary when evaluating columns in a main query against those in an EXISTS subquery, 
+# although it is not a requirement in general.
