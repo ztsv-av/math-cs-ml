@@ -430,6 +430,18 @@
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Subqueries
+# Subqueries refine how data are evaluated for inclusion in a main query.
+# Generally, for each row in a main query, a subquery is a predicate statement that evaluates to true or false. 
+# If the statement is true for the row, it is included in the result set; otherwise, it is not.
+# Basic evaluations are specified using an equal sign, an IN key word, or an EXISTS key word. 
+# When an equal sign is used, the subquery must return a single row with a single column. 
+# It operates exactly like a value argument in a standard query.
+# Subqueries can also provide valid column information by providing a value from a specific field in another related table or 
+# by providing different information from different tables depending on a specific value.
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
 # Conditional Queries
 # Conditional queries are a form of a subquery, 
 # but they are used in a different manner. 

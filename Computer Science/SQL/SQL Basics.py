@@ -125,3 +125,17 @@
 # Correlated subqueries are used to evaluate columns in a main query directly against those in a subquery. 
 # Correlation may be used in most subqueries and is necessary when evaluating columns in a main query against those in an EXISTS subquery, 
 # although it is not a requirement in general.
+
+# Single-row Subqueries
+# Subqueries that return only one or zero row to the outer statement are called one-row or single-row subqueries. Single-row subqueries are used with a comparison operator in a WHERE or HAVING clause.
+# Multiple-row Subqueries
+# Subqueries that return more than one row (but only one column) to the outer statement are called multiple-row subqueries. Multiple-row subqueries are used with an IN, ANY, SOME, or ALL clause.
+
+
+# JOINS
+# Inner join: Only records in the left table and the right table with matching keys
+# Left outer join: All records of the left table, with info from the right table only for those with matching keys
+# Right outer join: All records of the right table, with info from the left table only for those with matching keys
+# Full outer join: All records of both tables, with info from both tables only for those with matching keys; unmatched keys are added from each but with null for merged fields
+# Self join: Join between two fields of the same table and records with no matching keys for outer joins receive null values for the merged fields. Outer joins differ from the inner joins only when the minimum cardinality of a relation is zero.
+# Cross join: used to generate a paired combination of each row of the first table with each row of the second table. This join type is also known as cartesian join.
