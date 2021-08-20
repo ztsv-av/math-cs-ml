@@ -139,3 +139,15 @@
 # Full outer join: All records of both tables, with info from both tables only for those with matching keys; unmatched keys are added from each but with null for merged fields
 # Self join: Join between two fields of the same table and records with no matching keys for outer joins receive null values for the merged fields. Outer joins differ from the inner joins only when the minimum cardinality of a relation is zero.
 # Cross join: used to generate a paired combination of each row of the first table with each row of the second table. This join type is also known as cartesian join.
+
+# Aggregate functions
+# An aggregate function performs a calculation on a set of values, 
+# and returns a single value. Except for COUNT(*), aggregate functions 
+# ignore null values. Aggregate functions are often used with the GROUP BY 
+# clause of the SELECT statement.
+# All aggregate functions are deterministic. In other words, aggregate functions 
+# return the same value each time that they are called, 
+# when called with a specific set of input values.
+# Use aggregate functions as expressions only in the following situations:
+    # The select list of a SELECT statement (either a subquery or an outer query).
+    # A HAVING clause.

@@ -487,6 +487,8 @@
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+# Joins
+# -----
 # CROSS JOIN
 # The CROSS JOIN is used to generate a paired combination of each row of the first table with each row of the second table. 
 # This join type is also known as cartesian join.
@@ -526,3 +528,57 @@
     # FULL OUTER JOIN table2
     #   ON table1.column_name = table2.column_name
     # WHERE condition;
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# Aggregate functions
+# -------------------
+# COUNT function
+# COUNT is the simplest function and is useful in counting the number of records that is expected to be returned by a SELECT statement.
+    # SELECT COUNT(*)
+    # FROM table
+    # # returns num of rows
+# or with the condition
+    # SELECT COUNT(*)
+    # FROM table
+    # where salary > 50000
+    # # return num of rows where salary more than 50000
+# another useful example:
+    # SELECT COUNT(DISTINCT job)
+    # FROM table
+    # return num of distinct jobs in table
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# AVG function
+# The AVG() function returns the average value of an expression.
+# # NULL values are ignored.
+    # SELECT * FROM Products
+    # WHERE Price > (SELECT AVG(Price) FROM Products);
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# SUM function
+# The SUM() function returns the total sum of a numeric column. 
+    # SELECT SUM(column_name)
+    # FROM table_name
+    # WHERE condition;
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# MIN function
+# The MIN() function returns the smallest value of the selected column.
+    # SELECT MIN(column_name)
+    # FROM table_name
+    # WHERE condition;
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+# MAX function
+# The MAX() function returns the largest value of the selected column.
+    # SELECT MAX(column_name)
+    # FROM table_name
+    # WHERE condition;
+
+# --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
