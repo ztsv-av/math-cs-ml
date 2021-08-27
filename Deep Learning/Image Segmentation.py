@@ -48,6 +48,7 @@
 
 
 # Famous Image Segmentation architectures:
+# Predict segmentation masks for each instance of a class in the image
 #   -SegNet:
 #       Input - RGB Image
 #       Convolutional Encoder-Decoder:
@@ -63,5 +64,16 @@
 #           1 x Upsampling + 2 x (Conv + Batch Normalization + RELU) + 1 x Softmax Dense Layer
 #       Output - Segmented Image
 #   -UNet (look at architecture somewhere else, but the principle or encoder-decoder remains the same)
-#   -Mask R-CNN:
+#   -Mask R-CNN (instance segmentation):
 #       architecture that predicts class, boxes (builds of Faster R-CNN w/ ResNet (Object Detection)) and adds aditional layers for a segmentation of an image)
+
+# Instance Segmentation
+# This means that aside from the bounding boxes, the model is also able to predict segmentation masks for each instance of a class in the image
+#   -Mask R-CNN (expensive to train)
+#   Has 2 stage pipeline:
+#       1) generate region proposals for objects in the image using technique called
+#           RoIAlign (region of interest align)
+#       2) predict class of the object within the bounding boxes as well as pixel level mask
+#           based on this class.
+#           There are 2 CONV layers here: first, for feature extraction (ResNet of Inception) (also predicts bounding box?), 
+#           and second one final feature map used for classifiying pixels for segmentation

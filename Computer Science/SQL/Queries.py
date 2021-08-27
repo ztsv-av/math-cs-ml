@@ -563,6 +563,20 @@
     # SELECT SUM(column_name)
     # FROM table_name
     # WHERE condition;
+# or
+    # SELECT name, SUM(daily_pages) AS total_pages
+    # FROM writers
+    # GROUP BY name
+# which returns
+    # name  total_pages
+    # Jack  270 
+    # Jill  220
+    # John  250
+# you can use SUM with IF clause
+    # SELECT
+    #     SUM(IF(status = 'Shipped', 1, 0)) AS Shipped,
+    #     SUM(IF(status = 'Cancelled', 1, 0)) AS Cancelled
+    # FROM orders
 
 # --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
