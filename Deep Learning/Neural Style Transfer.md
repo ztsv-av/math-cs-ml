@@ -3,17 +3,17 @@ Neural style transfer is an algorithm that takes a pair of images - style image 
 ### 1. **Supervised learning**:
 &nbsp;&nbsp;&nbsp;&nbsp; - Pairs: original & stylized (manually created) images;  
 &nbsp;&nbsp;&nbsp;&nbsp; - It needs lots of pairs!  
-&nbsp;&nbsp;&nbsp;&nbsp; - So, you teach a model how to stylize an image
+&nbsp;&nbsp;&nbsp;&nbsp; - So, you teach a model how to stylize an image.
 ### 2. **Neural Style Transfer**:
 &nbsp;&nbsp;&nbsp;&nbsp; - Uses pre-trained model;  
 &nbsp;&nbsp;&nbsp;&nbsp; - Inputs: a single pair of images:  
-&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; - Extract style from image 1  
-&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; - Extract content from image 2  
-&nbsp;&nbsp;&nbsp;&nbsp; - Generate image to match style and content  
-&nbsp;&nbsp;&nbsp;&nbsp; - In a loop: minimize loss of generated image with respect to the style of image 1 and content of image 2  
-&nbsp;&nbsp;&nbsp;&nbsp; - You use loss minimization to merge the style and the content into the generated image
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; - Extract style from image 1;  
+&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; - Extract content from image 2.  
+&nbsp;&nbsp;&nbsp;&nbsp; - Generate image to match style and content;  
+&nbsp;&nbsp;&nbsp;&nbsp; - In a loop: minimize loss of generated image with respect to the style of image 1 and content of image 2;  
+&nbsp;&nbsp;&nbsp;&nbsp; - You use loss minimization to merge the style and the content into the generated image;
 ### 3. **Fast Neural Style Transfer**:
-&nbsp;&nbsp;&nbsp;&nbsp; - Faster version of Neural Style Transfer
+&nbsp;&nbsp;&nbsp;&nbsp; - Faster version of Neural Style Transfer.
 
 &nbsp;  
 
@@ -102,15 +102,15 @@ $$L_{content}(\vec{p}, \vec{x}, l) = \frac{1}{2} \cdot \sum_{i, j}(F_{i,j}^{l} -
 $$E_{l} = \frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)} * \sum_{i,j}(G_{i,j}^{l} - A_{i,j}^{l})^2$$
 &nbsp;&nbsp;&nbsp;&nbsp; - $E_{l}$ - loss at layer l,  
 &nbsp;&nbsp;&nbsp;&nbsp; - l - layer,  
-&nbsp;&nbsp;&nbsp;&nbsp; - $A_{i,j}^{l}$ - style representation (*gram matrix*) of style image a,  
-&nbsp;&nbsp;&nbsp;&nbsp; - $G_{i,j}^{l}$ - style representation (*gram matrix*) of generated image x,  
+&nbsp;&nbsp;&nbsp;&nbsp; - $A_{i,j}^{l}$ - style representation (*gram matrix*) of features for a single layer of style image a,  
+&nbsp;&nbsp;&nbsp;&nbsp; - $G_{i,j}^{l}$ - style representation (*gram matrix*) of features for a single layer of generated image x,  
 &nbsp;&nbsp;&nbsp;&nbsp; - $\frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)}$ - weight.  
        
 &nbsp;  
 
 ## **Steps to Develop Neural Style Transfer:**
-   1. Preprocess content & style images
-   2. Load pre-trained model, define loss functions
+   1. Preprocess content & style images;
+   2. Load pre-trained model, define loss functions;
    3. Loop:  
-&nbsp;&nbsp;&nbsp;&nbsp;        - Optimize and generate new image  
-&nbsp;&nbsp;&nbsp;&nbsp;        - Visualize outputs
+&nbsp;&nbsp;&nbsp;&nbsp;        - Optimize and generate new image;  
+&nbsp;&nbsp;&nbsp;&nbsp;        - Visualize outputs.
