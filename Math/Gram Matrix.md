@@ -1,5 +1,5 @@
 # **Gram Matrix**
- *Gram Matrix* - inner product between vectorized feature maps i and j in layer l
+ *Gram Matrix* is an inner product between vectorized feature maps i and j in layer l
  $$G_{ij}^l=\sum_kF_{ik}^l\cdot F_{jk}^l$$
  &nbsp;&nbsp;&nbsp;&nbsp; $G_{ij}^l$ - inner product between vectorized feature maps i and j in layer l,  
 &nbsp;&nbsp;&nbsp;&nbsp; $F_{ik}^l$ - feature map i in layer l,  

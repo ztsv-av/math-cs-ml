@@ -104,7 +104,9 @@ $$E_{l} = \frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)} * \sum_{i,j}(G_{i,j}^{l} - A
 &nbsp;&nbsp;&nbsp;&nbsp; - l - layer,  
 &nbsp;&nbsp;&nbsp;&nbsp; - $A_{i,j}^{l}$ - style representation (*gram matrix*) of features for a single layer of style image a,  
 &nbsp;&nbsp;&nbsp;&nbsp; - $G_{i,j}^{l}$ - style representation (*gram matrix*) of features for a single layer of generated image x,  
-&nbsp;&nbsp;&nbsp;&nbsp; - $\frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)}$ - weight.  
+&nbsp;&nbsp;&nbsp;&nbsp; - $\frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)}$ = $\frac{1}{(2 \cdot h \cdot w \cdot f)^2}$ - weight,  
+&nbsp;&nbsp;&nbsp;&nbsp; - $N_{l}$ - number of filters,  
+&nbsp;&nbsp;&nbsp;&nbsp; - $M_{l}$ - filter size (h $\cdot$ w)
        
 &nbsp;  
 
