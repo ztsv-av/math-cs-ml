@@ -17,6 +17,7 @@ Neural style transfer is an algorithm that takes a pair of images - style image 
 
 &nbsp;  
 
+## **Neural Style Transfer Process Explained**
 We start with the image that we want to transform and we call this the content image. 
 Then there's the image that gives us the style that we want to convert our image into - style image. 
 From these, we'll create a new image that we'll call the generated image. 
@@ -84,7 +85,7 @@ $$L_{total}(\vec{p}, \vec{a}, \vec{x}) = \alpha * L_{content}(\vec{p}, \vec{x}) 
 
 &nbsp;  
 
-## **Content Loss**
+### **Content Loss**
 &nbsp;&nbsp;&nbsp;&nbsp; - generated image - content image = element-wise subtraction;  
 &nbsp;&nbsp;&nbsp;&nbsp; - then do element-wise square;  
 &nbsp;&nbsp;&nbsp;&nbsp; - then do reduce sum to get a scalar value;  
@@ -97,7 +98,7 @@ $$L_{content}(\vec{p}, \vec{x}, l) = \frac{1}{2} \cdot \sum_{i, j}(F_{i,j}^{l} -
 
 &nbsp;  
 
-## **Style Loss**
+### **Style Loss**
 &nbsp;&nbsp;&nbsp;&nbsp; Concept is the same as in content loss.
 $$E_{l} = \frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)} * \sum_{i,j}(G_{i,j}^{l} - A_{i,j}^{l})^2$$
 &nbsp;&nbsp;&nbsp;&nbsp; - $E_{l}$ - loss at layer l,  
@@ -109,6 +110,29 @@ $$E_{l} = \frac{1}{(4 \cdot N_{l}^2 \cdot M_{l}^2)} * \sum_{i,j}(G_{i,j}^{l} - A
 &nbsp;&nbsp;&nbsp;&nbsp; - $M_{l}$ - filter size (h $\cdot$ w)
        
 &nbsp;  
+
+## **Total Variation Loss**
+&nbsp;&nbsp;&nbsp;&nbsp; - Decreases high frequence artifacts;  
+&nbsp;&nbsp;&nbsp;&nbsp; - Explicit regularization term on high frequency components.  
+&nbsp;  
+Basically, it removes noise that was presented by styling the image, i.e. smoothes out the image.  
+&nbsp;  
+To use it in code:
+```
+def calculate_gradients(image, content_targets, style_targets_style_weight, content_weight, with_regularization=False):
+
+   total_variation_weight = 30
+
+   with tf.GradientTape as tape:
+      if with_regularization:
+         loss += total_variation_weight * tf.image.total_variation(image)
+
+   gradients = tape.gradient(loss, image)
+
+   return gradients
+```
+
+&nbsp; 
 
 ## **Steps to Develop Neural Style Transfer:**
    1. Preprocess content & style images;
