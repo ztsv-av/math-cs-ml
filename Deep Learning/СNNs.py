@@ -27,4 +27,9 @@
 #               32   64  64        -1   0   -2
 #               48  192 128 <----- 0.5 4.5 -1.5 <----- ...
 #               128 192 168        1.5  2   -3
-#             
+#           If you have an image, 1x1 filter with strides 2x2, this will upsample the image 
+#           (1x1 filter does not change the image, but larger trained filters change it in a desired way):
+#                                   231 0 87  0                               231 0 87  0
+#               231 84      --->    0   0 0   0     --->    1x1 filter  --->  0   0 0   0
+#               3   200             3   0 200 0                               3   0 200 0    
+#                                   0   0 0   0                               0   0 0   0
