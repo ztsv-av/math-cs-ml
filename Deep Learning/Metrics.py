@@ -7,6 +7,19 @@
 # Intersection Over Union (IoU) - area of overlap / area of union (evaluates worst case perfomance)
 # Dice Score - 2 x (area of overlap / combined area) (evaluates average perfomance)
 
+# Unbalanced Classification
+# One of the most common evaluation metrics used
+# in unbalanced classification is ROC AUC; however, some people
+# claim that when the data set is highly imbalanced, ROC
+# AUC is not a suitable metric and a good alternative
+# would be the area under the precision-recall curve (PR
+# AUC), especially when dealing with high dimensional
+# data in which the positive class, i.e, anomalies, is more
+# important than the negative class, i.e., normal points.
+# Nonetheless, no single evaluation metric dominates others;
+# therefore, both ROC AUC and PR AUC can be used for evaluation
+
+
 import numpy as np
 
 def segmentation_IoU_DiceScore(y_true, y_pred):
