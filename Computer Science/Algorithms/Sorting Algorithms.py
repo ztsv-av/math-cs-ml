@@ -1,6 +1,31 @@
 # for testing
 array = [1, 5, -13, -5, 0, 99, 85, 17, 25, -66, 5, 6, 9, 101, 55, 13, 17, 99, 56, 76, 4, -101, 1000, -1000]
 
+def bubbleSort(arr):
+
+    """
+    Bubble Sort is the simplest sorting algorithm 
+    that works by repeatedly swapping the adjacent elements 
+    if they are in wrong order. 
+
+    Worst time complexity: n^2
+    Average time complexity: n^2
+    Best time complexity: n
+    Space complexity: 1
+
+    parameters
+    ----------
+    array : unsorted array
+    """
+
+    for i in range(len(array) - 1):
+ 
+        for j in range(0, len(array) - i - 1):
+ 
+            if arr[j] > arr[j + 1] :
+
+                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+
 def selectionSort(array):
 
     """
