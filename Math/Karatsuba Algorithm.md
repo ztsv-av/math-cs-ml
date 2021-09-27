@@ -1,6 +1,6 @@
 # Karatsuba Algoritm
 
-Karatsuba algorithm is used to multiply two large numbers with each other using divide-and-conquer technique. Its time complexity equals to:
+Karatsuba algorithm is used to multiply two large numbers with each other using divide-and-conquer technique. Note that the Karatsuba algorithm has one limitation: it only works with even-numbered total digits. However, this limitation can be easily countered by adding zeros ahead of a number with odd-numbered total digits. For example, the number 354 (three digits, odd) can be changed to 0354 (four digits, even). Its time complexity equals to:
 
 $T(n) = 3T(n/2)$ (3 calls steps) $+ \theta(n)$ (return step) 
 
