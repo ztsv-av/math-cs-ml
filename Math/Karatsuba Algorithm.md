@@ -2,7 +2,21 @@
 
 Karatsuba algorithm is used to multiply two large numbers with each other using divide-and-conquer technique. Its time complexity equals to:
 
-$T(n) = 3^{log_2n} = n^{log_23} = n^{1.58...}$
+$T(n) = 3T(n/2)$ (3 calls steps) $+ \theta(n)$ (return step) 
+
+Master theorem:  
+$T(n) = aT(n/b) + \theta(n^clog^dn)$
+
+In our example,  
+$a = 3, b = 2, c = 1, d = 0$
+
+$c < log_ba => T(n) = \theta(n^{log_ba}) = \theta(n^{1.58...})$
+
+or
+
+$T(n)= 3^{log_2n} = n^{log_23} = n^{1.58...}$
+
+
 
 To understand the concept behind it, see example below:
 
