@@ -1,6 +1,8 @@
 # Karatsuba Algoritm
 
-Karatsuba algorithm is used to multiply two large numbers with each other using divide-and-conquer technique. 
+Karatsuba algorithm is used to multiply two large numbers with each other using divide-and-conquer technique. Its time complexity equals to:
+
+$T(n) = 3^{log_2n} = n^{log_23} = n^{1.58...}$
 
 To understand the concept behind it, see example below:
 
