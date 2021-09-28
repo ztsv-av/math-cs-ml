@@ -1,3 +1,15 @@
+# Binary Tree Traversals:
+    # Preorder: visit root node, traverse TL, traverse TR
+    # Inorder: traverse TL, visit root node, traverse TR
+    # Postorder: traverse TL, traverse TR, visit root node.
+    # Examlpe:
+#                    a
+#                b       c
+#             d    e    f
+#              g  h    i  j
+#   Preorder sequence: a, b, d, g, e, h, c, f, i, j
+#   Inorder: d, g, b, h, e, a, i, f, j, c
+#   Postorder: g, d, h, e, b, i, j, f, c, a
 class Node:
     def __init__(self, key):
         self.key = key
