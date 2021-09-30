@@ -10,7 +10,11 @@
 #   Preorder sequence: a, b, d, g, e, h, c, f, i, j
 #   Inorder: d, g, b, h, e, a, i, f, j, c
 #   Postorder: g, d, h, e, b, i, j, f, c, a
+
+
 class Node:
+
+
     def __init__(self, key):
         self.key = key
         self.left = None
@@ -18,10 +22,15 @@ class Node:
 
 
 class BinarySearchTree:
+
+
     def __init__(self):
+
         self.root = None
 
+
     def search(self, desired_key):
+
         current_node = self.root
         while current_node is not None:
             # Return the node if the key matches.
@@ -41,6 +50,7 @@ class BinarySearchTree:
         # The key was not found in the tree.
         return None
     
+
     def insert(self, node):
 
         # Check if the tree is empty
@@ -68,7 +78,9 @@ class BinarySearchTree:
                     else:
                         current_node = current_node.right
         
+
     def remove(self, key):
+
         parent = None
         current_node = self.root
         
@@ -118,3 +130,89 @@ class BinarySearchTree:
                 current_node = current_node.left
                 
         return # Node not found
+
+
+# Check if a binary tree is BST or not
+
+INT_MAX = 4294967296
+INT_MIN = -4294967296
+
+
+def isBST(node):
+    
+    return (isBSTUtil(node, INT_MIN, INT_MAX))
+ 
+
+def isBSTUtil(node, mini, maxi):
+     
+    # An empty tree is BST
+    if node is None:
+        return True
+ 
+    # False if this node violates min/max constraint
+    if node.key < mini or node.key > maxi:
+        return False
+ 
+    # Otherwise check the subtrees recursively
+    # tightening the min or max constraint
+    return (isBSTUtil(node.left, mini, node.key -1) and
+          isBSTUtil(node.right, node.key+1, maxi))
+
+
+# Tree Traversals
+
+def printInorder(root):
+ 
+    if root:
+ 
+        # First recur on left child
+        printInorder(root.left)
+ 
+        # then print the data of node
+        print(root.key),
+ 
+        # now recur on right child
+        printInorder(root.right)
+ 
+
+def printPostorder(root):
+ 
+    if root:
+ 
+        # First recur on left child
+        printPostorder(root.left)
+ 
+        # the recur on right child
+        printPostorder(root.right)
+ 
+        # now print the data of node
+        print(root.key),
+ 
+
+def printPreorder(root):
+ 
+    if root:
+ 
+        # First print the data of node
+        print(root.key),
+ 
+        # Then recur on left child
+        printPreorder(root.left)
+ 
+        # Finally recur on right child
+        printPreorder(root.right)
+ 
+ 
+# Driver code
+root = Node(79)
+root.left = Node(66)
+root.right = Node(88)
+root.left.left = Node(50)
+root.left.right = Node(78)
+root.left.right.left = Node(77)
+root.right.left = Node(86)
+root.right.left.left = Node(82)
+root.right.left.left.right = Node(83)
+root.right.right = Node(90)
+root.right.right.left = Node(89)
+root.right.right.right = Node(94)
