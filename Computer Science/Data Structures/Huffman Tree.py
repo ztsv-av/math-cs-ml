@@ -9,6 +9,10 @@
 # This coding leads to ambiguity because code assigned to c is the prefix of codes assigned to a and b. 
 # If the compressed bit stream is 0001, the de-compressed output may be “cccd” or “ccb” or “acd” or “ab”.
 
+# The Huffman encoding for sorted input is a more efficient mechanism to encode or decode a given set of characters. 
+# The time complexity of the standard Huffman encoding algorithm can be significantly reduced if you can ensure that the input array, 
+# which indicates the code words and the frequency in which they appear on a given text, is sorted in a nondecreasing order of frequency.
+
 # There are mainly two major parts in Huffman Coding
     # Build a Huffman Tree from input characters.
     # Traverse the Huffman Tree and assign codes to characters.
