@@ -1,14 +1,15 @@
 # Linux CLI Commands
 
-## pwd
+## pwd Command
 
 pwd - prints path of the current directory.
 
-## ls
+## ls Command
 
 ls - lists files in the currect directory.
 
 - -l - shows details about files
+- -i - displays the inode number
 - -a - shows all files, even hidden ones
 - The first character gives the file type, and the next nine characters are the permission mask, or permission bits, that shows (and controls) who can read, write (change), and execute the file and its contents.
 - Next comes the link count, which is the number of links to the file’s inode (something that stores the metadata—all of the information about the file except its name). This is followed by the file’s owner’s username, which tells who owns the file and who is most responsible for that file. This can be any user’s name, be it a regular user, a system user or daemon, or even an application name.
@@ -20,15 +21,28 @@ ls - lists files in the currect directory.
 
 ![image](https://user-images.githubusercontent.com/73081144/145730485-4bf9128d-e2a8-4219-9bfb-57fc1ca2fba0.png)
 
-## cd
+## cd Command
 
 cd 'dir' - move to other directory.
 
-## cat
+- this is where directory is the name of a directory path to which you want to change. The path could be a full or partial path.
 
-cat 'file' - shows the contents of the file.
+| Command | Description |
+| ------- | ----------- |
+| cd or cd $HOME or cd ~ | Navigates to your home directory. |
+| cd .. | Navigates to a parent directory. |
+| cd . | Navigates to the current directory. Although this is not practical, it can still be done. |
+| cd / | Navigates to the root directory. |
+| cd child | Navigates to a child directory named child. |
+| cd ../sibling | Navigates to a sibling directory named sibling. |
+| cd ../.. | Navigates to the parent’s parent. Or, navigates up two levels. This would be the “grandparent.” |
+| cd ../../.. | Navigates to the parent’s grand-parent. Or, navigates up three levels. |
 
-## chmod
+## cat Command
+
+cat 'file' - used to display the contents of a file, but can be used to create one
+
+## chmod Command
 
 chmod - changes the permissions mask on a file or directory.
 
@@ -53,7 +67,7 @@ To set the permissions for the owner and the group (ug) to read and execute (rx)
 
 chmod ug=rw lotsofun
 
-## chown
+## chown Command
 
 chown - this is used for changing the ownership (and group assignment)
 
@@ -72,7 +86,7 @@ You want to change both the owner and the group of willie.txt to that of ww54326
 
 chown ww543267: lumpagroup willie.txt
 
-## chgrp
+## chgrp Command
 
 chgrp - this is used for just changing the group assignment.
 
@@ -90,7 +104,7 @@ To change the owning group of the directory /gobstopper/testing and all of the f
 
 chgrp -R slugworth /gobstopper/testing
 
-## mount & unmount
+## mount & unmount Commands
 
 mount - the mount command maps a directory, which can be an entire file system, into the existing directory tree.
 
@@ -127,3 +141,92 @@ unmount - used to disconnect file systems from the directory tree.
 - umount /dev/sda3 (unmount device sda3) or umount /usr/empty1 (unmount mount point /usr/empty1)
 
 Both the mount and umount commands require root (superuser) privileges to run successfully.
+
+## mkdir Command
+
+mkdir - makes new directory
+
+- mkdir [-options] directory-name
+- -p - used for creating a parent directory that does not exist in the path.
+
+For example, to create a directory named R, you would enter the following:
+
+mkdir R
+
+You can create several directories with a single mkdir command as long as you separate each directory name with a space.
+
+mkdir R S E
+
+For creating both parent and child directory, use -p option. For example, the command mkdir G/C2 will generate an error if the parent “G” is nonexistent. However, the command mkdir -p G/C2 will create the parent, G, first and then its child directory, C2, next.
+
+## rmdir Command
+
+rmdir - removes directories
+
+- rmdir [-options] directory-name
+- when using the command to remove a directory, the directory must be empty.
+- your current directory position cannot be the directory you are trying to remove.
+
+If you want to remove parent directory and its children, use -p option (v stands for verbose):
+
+rmdir -pv q/w/e/r/t/y
+
+However, it only works if the directories are empty.
+
+## rm Command
+
+rm - removes everything in path
+
+- rm [-options] path
+
+## mv Command
+
+mv - used to mode files
+
+- mv source destination
+
+This is where source is the file you want to move and destination is the file the source will be copied to. With cp, you end up with two files (the original and the duplicate), and with mv you end up with one (the newly moved/renamed one). For example, to move a file named f7.dat to f8dat, you would enter the following command:
+
+mv f7.dat f8.dat
+
+## touch Command
+
+touch - create an empty file or to change a file’s modification timestamp.
+
+- touch [-options] file_name
+
+You can also use the command to create an empty file. For example, to create an empty file named FunDay.dat, you would enter the following:
+
+touch FunDay.dat
+
+## echo Command
+
+echo - used to display text on the screen, but can be used to create a file
+
+Although the main use of the echo command is to display (echo) text on the screen, it can be used to create a file by using the following general format:
+
+echo text > filename
+
+This is where text is the text you want to be saved to the file named filename.
+
+So, for example, echo hi > f1.dat would place the text hi in the file name f1.dat.
+
+## cp Command
+
+cp - used to copy files
+
+- cp source destination
+
+This is where source is the file you want to copy and destination is the file the source will be copied to.
+
+For example, to copy a file named f3.dat to f4.dat, you would enter the following command:
+
+cp f3.dat f4.dat
+
+To copy all files of the same type:
+
+cp *.tar \Desktop
+
+To copy all files:
+
+cp -v *.* \Desktop
