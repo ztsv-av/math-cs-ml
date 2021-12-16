@@ -178,6 +178,7 @@ However, it only works if the directories are empty.
 rm - removes everything in path
 
 - rm [-options] path
+- use -r option if want to remove directory.
 
 ## mv Command
 
@@ -230,3 +231,25 @@ cp *.tar \Desktop
 To copy all files:
 
 cp -v *.* \Desktop
+
+# pushd and popd Commands
+
+pushd - saves current directory for future use.
+
+- pushd path (path where you want to go)
+
+used with popd
+
+popd - returns you to the last pushd directory.
+
+If you use multiple pushd, it stacks paths (first in last out).
+
+# which Command
+
+which - shows where a file is located
+
+- which filename
+
+# history Command
+
+history - prints commands that you used in a session.
