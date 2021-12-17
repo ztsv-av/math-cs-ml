@@ -15,9 +15,9 @@
 | Campus Area Network (CAN) | A Campus Area Network (CAN) is a computer network made up of an interconnection of local area networks (LANs) within a limited geographical area, such as a university's campus. Most of the networking components, such as the transmission media, switches, and routers are owned by the campus tenant. |
 | Metropolitan Area Network (MAN) | All of the networks within the same metropolitan area that are connected together. |
 | Wide Area Network (WAN) | A WAN connects several LANs. Wans are often limited to a corporation or an organization, but are sometimes accessible to the public. |
-|Internet | The internet is a collection of many different networks owned by many different entities that all share information and communicate together (interconnection of networks). |
-|Intranet | A local or restricted communications network, especially a private network created using World Wide Web software. | 
-|Extranet | An intranet that can be partially accessed by authorized outside users, enabling businesses to exchange information over the internet securely. | 
+| Internet | The internet is a collection of many different networks owned by many different entities that all share information and communicate together (interconnection of networks). |
+| Intranet | A local or restricted communications network, especially a private network created using World Wide Web software. | 
+| Extranet | An intranet that can be partially accessed by authorized outside users, enabling businesses to exchange information over the internet securely. | 
 | Topology | Topology is the term used to describe how devices are connected and how messages flow from device to device. The physical topology describes the way the network is wired. The logical topology describes the way messages are sent. |
 | Terminator | Terminators absorb signals and prevent them from reflecting repeatedly back and forth on the cable. Terminators are used with bus topology. |
 | Network Adapter (NIC) | Network interface card is a computer hardware component that connects a machine to a medium and transmints and receives data over a network. NICs operate at both Layer 1 and Layer 2 of the OSI model. They are specific to a network: to connect to a wired Ethernet network, you need to use an Etherent network adapter that uses RJ45 connection; to connect to a WiFi network, you need to use WiFi network adapter. |
