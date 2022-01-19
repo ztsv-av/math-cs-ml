@@ -253,3 +253,13 @@ which - shows where a file is located
 # history Command
 
 history - prints commands that you used in a session.
+
+# grep Command
+
+grep - searches line by line for a specified pattern and then outputs any line or word that matches the pattern.
+
+- grep [-options] ‘pattern’ [file]
+
+If the file argument is omitted, grep reads from the standard input. It is best to enclose the pattern within single quotes. For example, the grep command grep ‘apple’ fruitlist.txt will print out (display on the console) all lines containing "apple" from the fruitlist.txt file; therefore, lines with words such as "pineapple" or "apples" are printed, as shown in the following:
+
+![image](https://user-images.githubusercontent.com/73081144/146870393-64771975-dc2b-400a-84aa-cca144f67212.png)
