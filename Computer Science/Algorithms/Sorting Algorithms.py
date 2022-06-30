@@ -1,7 +1,7 @@
 # for testing
 array = [1, 5, -13, -5, 0, 99, 85, 17, 25, -66, 5, 6, 9, 101, 55, 13, 17, 99, 56, 76, 4, -101, 1000, -1000]
 
-def bubbleSort(arr):
+def bubbleSort(array):
 
     """
     Bubble Sort is the simplest sorting algorithm 
@@ -22,9 +22,27 @@ def bubbleSort(arr):
  
         for j in range(0, len(array) - i - 1):
  
-            if arr[j] > arr[j + 1] :
+            if array[j] > array[j + 1] :
 
-                arr[j], arr[j + 1] = arr[j + 1], arr[j]
+                array[j], array[j + 1] = array[j + 1], array[j]
+
+
+def insertionSort(array):
+
+    for i in range(1, len(array)):
+
+        up = array[i]
+        j = i - 1
+
+        while j >= 0 and array[j] > up:
+
+            array[j + 1] = array[j]
+            j -= 1
+
+        array[j + 1] = up    
+
+    return array    
+
 
 def selectionSort(array):
 
@@ -142,7 +160,7 @@ def shellSort(array, gapValues):
     for gapValue in gapValues:
 
         for startIdx in range(gapValue):
-            
+
             insertionSortInterleaved(array, startIdx, gapValue)
 
 def partition(array, startIdx, endIdx):
@@ -412,3 +430,70 @@ def radixSort(array):
 
     array.clear()
     array.extend(negatives + positives)
+
+
+# The parameter dir indicates the sorting direction, ASCENDING
+# or DESCENDING; if (a[i] > a[j]) agrees with the direction,
+# then a[i] and a[j] are interchanged.*/
+def compAndSwap(a, i, j, dire):
+    if (dire==1 and a[i] > a[j]) or (dire==0 and a[i] < a[j]):
+        a[i],a[j] = a[j],a[i]
+ 
+# It recursively sorts a bitonic sequence in ascending order,
+# if dir = 1, and in descending order otherwise (means dir=0).
+# The sequence to be sorted starts at index position low,
+# the parameter cnt is the number of elements to be sorted.
+def bitonicMerge(a, low, cnt, dire):
+    if cnt > 1:
+        k = cnt//2
+        for i in range(low , low+k):
+            compAndSwap(a, i, i+k, dire)
+        bitonicMerge(a, low, k, dire)
+        bitonicMerge(a, low+k, k, dire)
+ 
+# This function first produces a bitonic sequence by recursively
+# sorting its two halves in opposite sorting orders, and then
+# calls bitonicMerge to make them in the same order
+def bitonicSort(a, low, cnt,dire):
+    if cnt > 1:
+          k = cnt//2
+          bitonicSort(a, low, k, 1)
+          bitonicSort(a, low+k, k, 0)
+          bitonicMerge(a, low, cnt, dire)
+
+# Caller of bitonicSort for sorting the entire array of length N
+# in ASCENDING order
+# Note that this program works only when size of input is a power of 2.
+def bitonicCall(a,N, up):
+    bitonicSort(a,0, N, up)
+
+             
+def bucketSort(array):
+
+    arr = []
+    slot_num = 10 # 10 means 10 slots, each
+                  # slot's size is 0.1
+
+    for i in range(slot_num):
+        arr.append([])
+         
+    # Put array elements in different buckets
+    for j in array:
+        index_b = int(slot_num * j)
+        arr[index_b].append(j)
+     
+    # Sort individual buckets
+    for i in range(slot_num):
+        arr[i] = insertionSort(arr[i])
+         
+    # concatenate the result
+    k = 0
+    
+    for i in range(slot_num):
+
+        for j in range(len(arr[i])):
+
+            array[k] = arr[i][j]
+            k += 1
+
+    return array
