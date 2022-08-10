@@ -1,0 +1,25 @@
+# Balancing Functional, Structural and Behavioural Diagrams
+
+## Balancing Functional and Behavioral Models
+
+As in balancing the functional and structural models, we must ensure the consistency of the two sets of models. In this case, the activity diagrams, use‐case descriptions, and use‐case diagrams must agree with the sequence diagrams, behavioral state machines, and CRUDE matrix.
+
+First, sequence diagrams must be associated with a use case on the use‐case diagram and a use‐case description. For example, the sequence diagram in Figure 6‐5 is related to scenarios of the Make Old Patient Appt use case that appears in the use‐case description in Figure 6‐27 and the use‐case diagram in Figure 6‐28.
+
+Second, actors on sequence diagrams and/or CRUDE matrices must be associated with actors on the use‐case diagram or referenced in the use‐case description, and vice versa. For example, the aPatient actor in the sequence diagram in Figure 6‐5, and the Patient row and column in the CRUDE matrix in Figure 6‐16 appears in the use‐case diagram in Figure 6‐28 and the use‐case description in Figure 6‐27. However, the aReceptionist does not appear in the use‐case diagram but is referenced in the events associated with the Make Old Patient Appt use‐case description. In this case, the aReceptionist actor is obviously an internal actor, which cannot be portrayed on UML's use‐case diagram.
+
+Third, messages on sequence diagrams, transitions on behavioral state machines, and entries in a CRUDE matrix must be related to activities and actions on an activity diagram and events listed in a use‐case description, and vice versa. For example, the CreateAppt() message on the sequence diagram (see Figure 6‐5) is related to the CreateAppointment activity (see Figure 6‐29) and the S‐1: New Appointment subflow on the use‐case description (see Figure 6‐28). The C entry in the Receptionist Appointment cell of the CRUDE matrix is also associated with these messages, activity, and subflow.
+
+Fourth, all complex objects represented by an object node in an activity diagram must have a behavioral state machine that represents the object's lifecycle, and vice versa. As stated previously, complex objects tend to be very dynamic and pass through a variety of states during their lifetimes. However, in this case because we no longer have any object nodes in the activity diagram (see Figure 6‐29), there is no necessity for a behavioral state machine to be created based on the activity diagram.
+
+## Balancing Structural and Behavioral Models
+
+When considering the structural and behavioral models, there are five areas in which we must ensure the consistency between the models.17 First, objects that appear in a CRUDE matrix must be associated with classes that are represented by CRC cards and appear on the class diagram, and vice versa. For example, the Patient class in the CRUDE matrix in Figure 6‐16 is associated with the CRC card in Figure 6‐30 and the Patient class in the class diagram in Figure 6‐1.
+
+Second, because behavioral state machines represent the life cycle of complex objects, they must be associated with instances (objects) of classes on a class diagram and with a CRC card that represents the class of the instance. For example, the behavioral state machine that describes an instance of a Patient class in Figure 6‐20 implies that a Patient class exists on a related class diagram (see Figure 6‐1) and that a CRC card exists for the related class (see Figure 6‐30).
+
+Third, the objects on a sequence diagram must be an instantiation of a class that is represented by a CRC card and is located on a class diagram. For example, Figure 6‐5 has an anAppt object that is an instantiation of the Appointment class. Therefore, the Appointment class must exist in the class diagram (see Figure 6‐1), and a CRC card should exist that describes it. However, when an object on a sequence diagram that is not associated with a class that exists on the class diagram, e.g., UnpaidBill, the analyst must decide to either modify the class diagram by adding these classes or rethink the sequence diagram. In this case, it is better to add the class to the class diagram (see Figure 6‐31).
+
+Fourth, messages contained on the sequence diagrams, transitions on behavioral state machines, and cell entries on a CRUDE matrix must be associated with responsibilities and associations on CRC cards and operations in classes and associations connected to the classes on class diagrams. For example, the CreateAppt() message on the sequence diagram in Figure 6‐5 relates to the makeAppointment operation of the Patient class and the schedules association between the Patient and Appointment classes on the class diagram (see Figure 6‐31).
+
+Fifth, the states in a behavioral state machine must be associated with different values of an attribute or set of attributes that describe an object. For example, the behavioral state machine for the hospital patient object implies that there should be an attribute, possibly current status, which needs to be included in the definition of the class.

@@ -1,0 +1,7 @@
+# Behavioural Models
+
+Behavioral models describe the internal dynamic aspects of an information system that supports the business processes in an organization. During analysis, behavioral models describe what the internal logic of the processes is without specifying how the processes are to be implemented. Later, in the design and implementation phases, the detailed design of the operations contained in the object is fully specified. Analysts use behavioral models to represent the internal behavior or dynamic view of an information system. The behavioral view is driven by the original use cases uncovered during business process and functional modeling. Therefore, as with all object‐oriented modeling, behavioral modeling is use case driven.
+
+## Types of Behavioral Models
+
+There are two types of behavioral models. First, there are behavioral models used to *represent the underlying details* of a business process portrayed by a use‐case model. In UML, activity and sequence are used for this type of behavioral model. Practically speaking, these interaction diagrams allow the analyst to model the distribution of the behavior of the system over the actors and objects in the system. In this way, we can easily see how actors and objects collaborate to provide the functionality defined in a use case. Second, a behavioral model is used to *represent the changes that occur in the underlying data*. UML uses behavioral state machines for this.

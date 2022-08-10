@@ -1,0 +1,19 @@
+# Collaboration Diagrams
+
+Collaboration diagrams and sequence diagrams give the same information but display it differently. These diagrams are so similar that some modeling tools can convert from one diagram type to the other. All collaboration diagrams show objects and messages and the links between them. Objects are the things that participate in the activity, and they provide the information needed to the methods that they call. Messages represent the initiation of an operation on an object. Objects can have one or more messages associated with them. The connections between objects are referred to as links. This is how collaboration diagrams are different from sequence diagrams; they visually represent the relationships between objects, whereas in sequence diagrams the messages are represented. Collaboration diagrams are not as good as sequence diagrams when trying to show the series of events, but they do a better job representing the complexities of branching.
+
+![image](https://user-images.githubusercontent.com/73081144/178641802-a57ed87f-8ec0-456d-a70f-b1a2353000f5.png)
+
+When creating collaboration diagrams, the most significant objects should be placed in the center of the diagram. This helps to show the relationship between the objects that will collaborate. When creating a collaboration diagram, you must consider the scope of the diagram. This usually means considering the use cases that it will contain. The following are the steps in creating a collaboration diagram:
+
+- If an object has properties of state (information about the object) that are important to the collaboration, make sure to set or initialize their values.
+- Next, create the links between the objects to establish the relationships.
+- Create the messages associated with each link between the objects to establish the relationships.
+- Add sequence numbers to show the order of the messages between the collaborations.
+Following these steps will create a diagram that represents the collaborations found within a system.
+
+Objects have properties that describe or hold information about themselves. As indicated above, it is good practice to initialize these values when creating these objects. The state of an object that has not yet been interacted with is said to be in its default state, but this is subject to change once the system begins to go to work on it. The change in information about an object is referred to as a state change in that object. If a significant amount of change happens in an object, it is possible to make a new instance of the object (default state) and to draw messages to the initial object with a message indicating “BECOMES” to show the transition.
+
+When looking at sequence and collaboration diagrams, it is common to look at both diagrams at a particular point and time in the system. This static lens does not lend itself well to seeing the changes that go on in a dynamic system. When modeling these systems, it is important to not lose sight of the significance of the interactions within the system. Both sequence and collaboration diagrams do an excellent job representing dynamic systems. The sequence of steps, objects in the process, and the messages that are exchanged, are best represented in a sequence diagram. The collaboration diagram includes similar information but places more emphasis on the relationship between objects. This diagram highlights the objects in a system and their relationships.
+
+Collaboration diagrams emphasize the structure of the relationships among objects as well as their interactions. Due to the way the objects are laid out on a collaboration diagram, it is much easier to see the relationships and interactions among objects than in a sequence diagram. This view is very similar to that of a class diagram, which helps developers to work with collaboration diagrams.
