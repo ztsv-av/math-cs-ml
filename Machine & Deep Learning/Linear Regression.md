@@ -4,6 +4,8 @@ Linear regression is a supervised learning model, because it predicts numbers an
 
 ![image](https://user-images.githubusercontent.com/73081144/183325244-a41f5edc-7224-4dc1-879d-607a3985e192.png)
 
+## Linear Regression with One Feature
+
 *Fig.1. Example of a linear regression problem.*
 
 $f_{w, b}(x) = wx + b$ - linear regression model, where w, b are parameters (coefficients/weights).
@@ -49,3 +51,50 @@ The squared error cost function has only 1 local minimum - global minimum, becau
 ![image](https://user-images.githubusercontent.com/73081144/183825746-27927fd3-ecd4-4a7b-be01-ca0980703872.png)
 
 *Fig. 8. Gradient descend in action.*
+
+
+## Linear Regression with Multiple Feature (Multiple RegressionA)
+
+The task is basically the same, but with multiple $x_j$, where $j=1,2,3...,n, n=$ number of features.
+
+For example, for one feature we have:
+
+$f_{w,b}(x)=wx+b$
+
+With multple features we have:
+
+$f_{w,b}(x)=wx_1 + wx_2 + ... + wx_n + b$, $n=$ number of features.
+
+![image](https://user-images.githubusercontent.com/73081144/184567371-c84cda47-ea72-4bfb-afa8-881932cf57d9.png)
+
+![image](https://user-images.githubusercontent.com/73081144/184567458-82eb342f-dd0b-492b-a3b7-55cc68a3bdd9.png)
+
+*Fig. 9 and 10. Linear regression with multiple features example.*
+
+You can think of multiple $w$ as weights for each feature. For example, as the size increases, the price of the house increases by 100 $ (1 unit - 1k $), as the number of bedrooms in a house increases, the price of the house increases too by 4k $, and so on, where b is the base price of a house.
+
+You can write linear regression equation in the vector or matrix form:
+
+![image](https://user-images.githubusercontent.com/73081144/184569037-361cfb3f-1aa0-4d97-9c3e-cbc1bb5d8bcc.png)
+
+*Fig. 11. Multiple linear regression in vector form.*
+
+### Gradient Descent for Multiple Linear Regression
+
+The gradient descent functions look the same, but with slight differences: now, to update $w_j$ you will calculate partial derivative with respect to $x_j$. The formulas are in the figures below.
+
+![image](https://user-images.githubusercontent.com/73081144/184570714-250d49b1-ad6d-41d8-b4d3-df6e16365b93.png)
+
+![image](https://user-images.githubusercontent.com/73081144/184570880-0d7b893a-7bf5-4f30-ae4d-ff5b0230629b.png)
+
+*Fig. 12 and 13. Gradient descent for multiple linear regression.*
+
+## Linear Regression for Classification
+
+You shouldn't use Linear Regression for classification purposes. One noisy example can shit the whole line making the function worse, because many examples will be misclassified. For classification you logistic regression.
+
+For example, use linear regression when you need to estimate the weight of a cat based on its height, but do not use it if you need to decide whether an animal is a cat or not a cat.
+
+![image](https://user-images.githubusercontent.com/73081144/185814014-ba55d986-8e19-4aa3-9f9c-ba9d6fb5a5dd.png)
+
+*Fig. 14. Linear Regression in Classification.*

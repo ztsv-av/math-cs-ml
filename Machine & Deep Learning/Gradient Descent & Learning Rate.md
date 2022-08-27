@@ -1,6 +1,6 @@
 # Gradient Descent
 
-Gradient descent is used to minimize any function by taking partial derivatives of function's parameters. Our goal is to find values of parameters that minimize the function's value as much as possible.
+Gradient descent is used to minimize any function by taking partial derivatives of function's parameters. Our goal is to find values of parameters that minimize the function's value as much as possible. Cost function should decrease after every gradient descent iteration.
 
 Goal outline:
 - start with some $w,b$ (set $w=0, b=0$)
@@ -11,7 +11,7 @@ Goal outline:
 
 *Fig. 1. Gradient descent process. In the process, you look around and take a step to the direction of the steepest descent until you reach **local minima**.*
 
-## Gradient Descent algorithm
+## Gradient Descent Algorithm
 
 Repeat these two steps until convergence (until all parameters, for example $w,b$, no longer change much with each additional step):
 
@@ -61,6 +61,18 @@ If $\alpha$ is too **small**, then gradient descent will take tiny steps towards
 If $\alpha$ is too **large**, then gradient descent will take big steps towards the local minima, and the whole training process may be **faster**, but it might constantly **miss** local minima, because steps are too big to descent lower.
 
 ![image](https://user-images.githubusercontent.com/73081144/183822563-2d14f851-8315-4e61-a29a-8270b88cbcf9.png)
+
+*Fig. 6. Learning rate: small and large.*
+
+![image](https://user-images.githubusercontent.com/73081144/185274638-bbde62ce-9628-4821-aa43-b199c4cccba8.png)
+
+*Fig. 7. Choosing proper learning rate.*
+
+![image](https://user-images.githubusercontent.com/73081144/185274846-22525b16-89d1-45a8-974b-9376cf2cd9cb.png)
+
+*Fig. 8. Trying out different values of learning rate.*
+
+If you cost function is constantly increasing, try choosing very small learning rate, to see if it still getting larger and larger. If it is, then something is wrong with the model or data or code.
 
 ## Batch
 
