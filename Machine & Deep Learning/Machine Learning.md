@@ -14,13 +14,36 @@ Machine learning - field of study that gives computers the ability to learn with
 
 ## Terminology
 
-- Training set: data used to train the model. Usually consists of features and targets (supervised learning).
-- x: "input" variable; feature.
-- y: "output", "target" variable.
-- m: number of training examples;
-- (x,y): single training example.
-- $(x^i, y^i)$: $i^{th}$ training example.
-- cost function: error, measurment of how a prediction is distant from the truth value.
+### Machine Learning
+
+- training set - data used to train the model. Usually consists of features and targets (supervised learning);
+- x - "input" variable; feature;
+- y - "output", "target" variable;
+- m - number of training examples;
+- (x,y) - single training example;
+- $(x^i, y^i)$ - $i^{th}$ training example;
+- cost function - error, measurment of how a prediction is distant from the truth value;
+- generalization - the ability of an algorithm for making predictions. You say you want your algorithm to generalize well, meaning make good prediction;
+- regularization - prevents your model to choose high values for parameters, so there is no need to throw away important features if model overfits training data;
+- 
+### Neural Networks
+
+- input layer - layer that consists of all input features;
+- hidden layer - middle layer, layer that constists of many neurons which perform some computations and output activations;
+- output layer - last layer in the network
+- activation - how much a neuron is sending a high output to other neurons downstream from it (output of a neuron)
+
+    $a^{[l]}_j = g(\vec{w}^{[l]}_j * \vec{a}^{[l-1]} + b^{[l]}_j)$
+
+- layer - grouping of neurons which takes as input the same or similar features, and that in turn outputs a few numbers together;
+- multilayer perceptron - a neural network with multiple hidden layers;
+
+### Neuroscience
+
+- nucleus - cell body of a neuron;
+- dendrite - wire that receives input (electrical impulse) from other neurons;
+- axon - output wire that is used to send information (electrical impulse) to other neurons;
+- activation - how much a neuron is sending a high output to other neurons downstream from it.
 
 ## Applications
 
