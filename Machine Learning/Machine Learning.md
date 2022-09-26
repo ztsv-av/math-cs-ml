@@ -25,7 +25,8 @@ Machine learning - field of study that gives computers the ability to learn with
 - cost function - error, measurment of how a prediction is distant from the truth value;
 - generalization - the ability of an algorithm for making predictions. You say you want your algorithm to generalize well, meaning make good prediction;
 - regularization - prevents your model to choose high values for parameters, so there is no need to throw away important features if model overfits training data;
-- 
+- batch: the batch size is a number of samples processed before the model is updated; the size of a batch must be more than or equal to one and less than or equal to the number of samples in the training dataset;
+
 ### Neural Networks
 
 - input layer - layer that consists of all input features;

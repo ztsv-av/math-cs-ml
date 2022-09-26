@@ -1,4 +1,8 @@
-# Gradient Descent
+# Optimization Algorithms
+
+Optimization algorithm is used to update parameters of a network.
+
+## Gradient Descent
 
 Gradient descent is used to minimize any function by taking partial derivatives of function's parameters. Our goal is to find values of parameters that minimize the function's value as much as possible. Cost function should decrease after every gradient descent iteration.
 
@@ -11,7 +15,7 @@ Goal outline:
 
 *Fig. 1. Gradient descent process. In the process, you look around and take a step to the direction of the steepest descent until you reach **local minima**.*
 
-## Gradient Descent Algorithm
+### Gradient Descent Algorithm
 
 Repeat these two steps until convergence (until all parameters, for example $w,b$, no longer change much with each additional step):
 
@@ -32,7 +36,9 @@ Remember to update all parameters **simultaneously**.
 
 ![image](https://user-images.githubusercontent.com/73081144/183820365-96c8ab42-8a59-43b9-9d99-258b87f59d30.png)
 
-## Gradient Descent Intuition
+*Fig. 2. Gradient descent intuition.*
+
+### Gradient Descent Intuition
 
 Repeat until convergence:
 
@@ -46,34 +52,30 @@ Intuition example where there is only 1 parameter $w$:
 
 ![image](https://user-images.githubusercontent.com/73081144/183821778-ee8d7d45-38e2-4253-83a4-9f7f6abaeb88.png)
 
+*Fig. 3. Role of derivative in gradient descent.*
+
 If you are already at local minimum, then gradient descent will not change the value of a parameter, because the slope will be equal to 0.
 
 ![image](https://user-images.githubusercontent.com/73081144/183822800-9ad3234b-9469-4ef9-b6fa-4818646fb0eb.png)
+
+*Fig. 4. Gradient descent at local minimum.*
 
 The size of the step (value of the partial derivative) will also decrease after each iteration, because, usually, the slope will decrease as we descent towards a local minima.
 
 ![image](https://user-images.githubusercontent.com/73081144/183823461-b5e5fad9-0971-4261-9866-4cbd2c5b3d0b.png)
 
-## Learning Rate
+*Fig. 5. Role of a learning rate in gradient descent.*
 
-If $\alpha$ is too **small**, then gradient descent will take tiny steps towards the local minima, and the whole training process may be **slow**.
+## Adaptive Moment Estimation (Adam)
 
-If $\alpha$ is too **large**, then gradient descent will take big steps towards the local minima, and the whole training process may be **faster**, but it might constantly **miss** local minima, because steps are too big to descent lower.
+The Adam algorithm is almost the same as gradient descent, but it doesn't use a single global learning rate $\alpha$. It uses a different learning rates for every single parameter of your model.
 
-![image](https://user-images.githubusercontent.com/73081144/183822563-2d14f851-8315-4e61-a29a-8270b88cbcf9.png)
+![image](https://user-images.githubusercontent.com/73081144/191166838-38ac4b62-5e2d-46ca-a022-423216a48a1f.png)
 
-*Fig. 6. Learning rate: small and large.*
+*Fig. 6. Individual learning rate for each trainable parameter in Adam optimization algorithm.*
 
-![image](https://user-images.githubusercontent.com/73081144/185274638-bbde62ce-9628-4821-aa43-b199c4cccba8.png)
+The intuition behind the Adam algorithm is, if a parameter $w_j$, or $b$ seems to keep on moving in roughly the same direction. This is what we see on the first example in the *Fig. 7*. But if it seems to keep on moving in roughly the same direction, let's increase the learning rate for that parameter. Let's go faster in that direction. Conversely, if a parameter keeps oscillating back and forth, this is what we see in the second example in the *Fig. 7*. Then let's not have it keep on oscillating or bouncing back and forth. Let's reduce $\alpha_j$ for that parameter a little bit.
 
-*Fig. 7. Choosing proper learning rate.*
+![image](https://user-images.githubusercontent.com/73081144/191167193-3ef8b385-6b69-4e93-9c65-32bb17eb497c.png)
 
-![image](https://user-images.githubusercontent.com/73081144/185274846-22525b16-89d1-45a8-974b-9376cf2cd9cb.png)
-
-*Fig. 8. Trying out different values of learning rate.*
-
-If you cost function is constantly increasing, try choosing very small learning rate, to see if it still getting larger and larger. If it is, then something is wrong with the model or data or code.
-
-## Batch
-
-"Batch" gradient descent means that each step of gradient descent uses all the training examples.
+*Fig. 7. Adam intuition.*

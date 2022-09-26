@@ -58,6 +58,25 @@ $$a^{[l]}_j = g(\vec{w}^{[l]}_j * \vec{a}^{[l-1]} + b^{[l]}_j)$$
 
 *Fig. 8. Neural networks notation.*
 
+## Parameters Dimensions and Numbers
+
+The dimensions of parameters $W$ and $b$ are determined as follows:
+- if network has $s_{in}$ units in a layer and $s_{out}$ units in the next layer, then: 
+  - $W$ will be of dimension $s_{in} \times s_{out}$.
+  - $b$ will a vector with $s_{out}$ elements
+  
+Therefore, if we have a NN with $25$ units in layer 1, $15$ units in layer 2 and $1$ output unit in layer 3, then the shapes of $W$, and $b$, are: 
+- layer1: The shape of $W1$ is (400, 25) and the shape of $b1$ is (25,)
+- layer2: The shape of $W2$ is (25, 15) and the shape of $b2$ is: (15,)
+- layer3: The shape of $W3$ is (15, 1) and the shape of $b3$ is: (1,)
+
+The number of parameters in each layer correspond to the following formula:
+
+*num_params* = $s_{in} \times s_{out} + s_{out}$ 
+, where
+- $s_{in}$ - dimension of the inputs to the layer;
+- $s_{out}$ - number of units in the layer.
+
 ## Forward Propagation
 
 Forward propagation is the process of propagating the activations of the neurons. In neural networks, computations are made in the forward direction from left to right. And this is in contrast to a different algorithm called backward propagation or back propagation, which is used for learning.

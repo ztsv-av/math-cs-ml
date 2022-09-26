@@ -36,3 +36,13 @@ If $\lambda \approx 0$, then the model will overfit. If $\lambda$ is too large, 
 ![image](https://user-images.githubusercontent.com/73081144/187055108-9f856919-4abe-4330-9e79-831ed50e35a2.png)
 
 *Fig. 4. Gradient descent with regularization.*
+
+Choose regularization parameter $\lambda$ from $0$ up to $10$ (start from $0, 0.01, ...$ **doubling** the value every iteration) until you find the model that has the lowest cost value on validation set.
+
+![image](https://user-images.githubusercontent.com/73081144/192173455-b859943c-0473-4a74-a5df-7bbb336f9526.png)
+
+*Fig. 5. Choosing $\lambda$.*
+
+![image](https://user-images.githubusercontent.com/73081144/192173689-a1f1a78f-9550-42e2-bdd6-1e21ebffdb2e.png)
+
+*Fig. 6. How value of regularization parameter $\lambda$ corresponds to **bias** and **variance**.*
