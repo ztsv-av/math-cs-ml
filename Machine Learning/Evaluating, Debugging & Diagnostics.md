@@ -2,6 +2,14 @@
 
 **Diagnostic** is a test you run to gain insight into what is/isn't working with a learning algorithm, to gain guidance into improving its pefromance.
 
+## Error Analysis
+
+The error analysis process refers to manually looking through all misclassified cross validation examples and trying to gain insights into where the algorithm is going wrong, if it is possible. For example, imagine we have spam classification problem. Our model misclassified 100 examples, 21 of which are related to pharmaceutical, 18 to password stealing, 7 to unusual email routing, 3 to deliberate misspellings and 5 to where there is a spam embedded image. So, it is clear that we should figure out how to reduce error related to pharmaceutical and phishing emails.
+
+If there is a large number of misclassified examples, take a random sample to perform error analysis on them (around 100-200).
+
+After error analysis, you might want to add more data of the types where analysis has indicated it might help, such as pharma spam data.
+
 ## Evaluation
 
 There is a simple technique which is used to evaluate your model through a test set. First, you take your dataset and split it into **train**, **validation** (optional) and **test** sets. You use *train* set to fit your model and then *test* set to evaluate it. Use any *metric* to evaluate your model. High & low cost and metric function values correspond to underfitting and overfitting of data by a model.
