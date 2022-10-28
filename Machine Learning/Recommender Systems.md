@@ -61,6 +61,15 @@ $repeat \space\{$
 
 $\}$
 
+## Limitations of Collaborative Filtering
+
+- Not very good for cold start problems:
+  - rank new items that few users have rated;
+  - show something reasonable to new users who have rated few items.
+- Difficult to use side information about items or users:
+  - item: genre, movie stars, studio, etc.;
+  - user: demographics (age, gender, location), expressed preferences, etc.
+
 ## Binary Labels
 
 Possible recommender binary labels are: favorited, liked, clicked, engaged, etc.
@@ -106,4 +115,16 @@ In order to carry out mean normalization, you subtract mean of one movie with ev
 
 *Fig. 3. Mean normalization.*
 
-In order not to predict negative values (e.g. movie rating), you going to add mean back to the linear function.
+In order not to predict negative values (e.g. movie ratings), add mean back to the linear function.
+
+## Finding Related Items
+
+To find an item $k$ related to an item $i$, just compare their features. In other words, find an item $x^{(k)}$ with features similar to $x^{(i)}$. To compare features, use **squared distance** between them:
+
+$\sum^n_{l=1}(x_l^{(k)} - x_l^{(i)})^2$
+
+or
+
+$||x^{(k)} - x^{(i)}||^2$
+
+
