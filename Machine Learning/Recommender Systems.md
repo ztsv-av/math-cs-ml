@@ -61,7 +61,7 @@ $repeat \space\{$
 
 $\}$
 
-## Limitations of Collaborative Filtering
+### Limitations of Collaborative Filtering
 
 - Not very good for cold start problems:
   - rank new items that few users have rated;
@@ -70,7 +70,7 @@ $\}$
   - item: genre, movie stars, studio, etc.;
   - user: demographics (age, gender, location), expressed preferences, etc.
 
-## Binary Labels
+### Binary Labels
 
 Possible recommender binary labels are: favorited, liked, clicked, engaged, etc.
 
@@ -127,4 +127,100 @@ or
 
 $||x^{(k)} - x^{(i)}||^2$
 
+## Content-based Filtering
 
+Collaborative filtering recommends items based on ratings of users who gave similar ratings as you.
+
+Content-based filtering **recommends** items **based on features of user and item** to find a good match.
+
+Possible features:
+
+1) user features $x_u^{(j)}$ for user $j$:
+     - age;
+     - gender;
+     - country;
+     - movies watched (e.g. 1000 most popular movies user watched);
+     - average rating per genre;
+     - ...
+2) movie features $x_m^{(i)}$ for movie $i$:
+     - year;
+     - genre/genres;
+     - reviews;
+     - average rating;
+     - ...
+
+Feature vector sizes for user and movie can differ.
+
+Predict rating of user $j$ on movie $i$ as:
+
+$v^{(j)}_u * v^{(i)}_m$ , where:
+- $v^{(j)}_u$ = user preferences - computed from $x^{(j)}_u$;
+- $v^{(i)}_m$ = movie features - computed from $x^{(i)}_m$;
+
+Notice we remoed $b^{(j)}$. Turns out bias just worsens the perfomance of an algorithm.
+
+The challenge here is given $x^{(j)}_u$ and $x^{(i)}_m$ how we can compute $v^{(j)}_u$ and $v^{(i)}_m$ respectevely.
+
+$v^{(j)}_u$ and $v^{(i)}_m$ are of the same size, because there is a dot-product between them.
+
+With content-based filtering it is worth spending more time on **feature engineering**.
+
+### Cost Function
+
+Cost function for content-based filtering is as follows:
+
+$$J = \sum_{(i, j):r(i,j)=1}(v_u^{(j)} \cdot v_m^{(i)} - y^{(i,j)})^2 + NN \space regularization$$
+
+### Algorithm
+
+To develop content-based filtering, we will use combined prediction of two neural networks: user and movie networks.
+
+![image](https://user-images.githubusercontent.com/73081144/199142303-f58a32da-a0ed-4ad5-b9ba-1100e7a07471.png)
+
+*Fig. 4. Content-based filtering neural networks.*
+
+We can apply sigmoid function to the dot-product to predict the probability that $y^{(i,j)}$ is 1.
+
+![image](https://user-images.githubusercontent.com/73081144/199143453-fa109850-63b4-4e89-9185-d5d45bf458c6.png)
+
+*Fig. 5. Content-based filtering prediction process.*
+
+Notice that both neural networks train at the same time. We're going to judge the two networks according to how well $v_u$ and $v_m$ predict $y^{(i,j)}$, and with this cost function, we're going to use gradient descent or some other optimization algorithm to tune the parameters of the neural network to cause the cost function J to be as small as possible. If you want to regularize this model, we can also add the usual neural network regularization term to encourage the neural networks to keep the values of their parameters small.
+
+### Finding Similar Items
+
+- $v^{(j)}_u$ - vector of length $m$ describing user $j$ with features $x^{(j)}_u$
+- $v^{(i)}_m$ - vector of length $m$ describing movie $i$ with features $x^{(i)}_m$
+
+Thereby, to find movies similar to movie $i$ take squared distance between movie vector and all other movie vectors: 
+
+$min||v^{(k)}_m - v^{(i)}_m||^2$
+
+*Note: this can be pre-computed ahead of time. You can run a compute server overnight to go through the list of all your movies and for every movie, find similar movies to it, so that tomorrow, if a user comes to the website and they're browsing a specific movie, you can already have pre-computed to 10 or 20 most similar movies to show to the user at that time.*
+
+### Efficient Recommendations / Retrieval & Ranking
+
+Recommender systems will sometimes need to pick a handful of items to recommend, from a catalog of thousands or millions or 10s of millions or even more items. How do you do this efficiently computationally?
+
+If you feed 10s of millions movie/ads/songs/products feature vectors through neural network, it will take a lot of time to find the most relatable items to user preference.
+
+For that, there is are two steps called **retrieval & ranking**.
+
+![image](https://user-images.githubusercontent.com/73081144/199144223-e32fce54-397c-4345-aa0b-3ac0622d747c.png)
+
+*Fig. 6. Retrieval step.*
+
+The goal of retrieval step is to find a broad coverage of plausible item candidates related to user preference.
+
+*For retrieval step 1) - find similar movies through precomputed lookup table.*
+
+![image](https://user-images.githubusercontent.com/73081144/199144431-38077818-6710-457d-a68b-ca625fa53961.png)
+
+*Fig. 7. Ranking step.*
+
+In ranking step, take generated list through retrieval step and feed it into neural network to generate possible user ratings for this list of movies. Then, pick top $n$ movies and recommend them to user.
+
+*If you computed $v_m$ for all the movies in advance, then all you need to do is to do inference on $x_u => v_u$ part of the neural network a single time to compute $v_u$. And then take that just computed $v_u$ for the user on your website right now. And take the inner product between $v_u$ and $v_m$ for the movies that you have retrieved during the retrieval step. So this computation can be done relatively quickly.*
+
+- Retrieving more items results in better perfomance, but slower recommendations.
+- To analyze/optimize the trade-off, carry out offline experiments to see if retrieving additional items results in more relevant recommendations (i.e. $p(y^{(i,j)}=1$ of items displayed to user are higher).
