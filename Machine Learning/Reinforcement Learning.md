@@ -8,6 +8,8 @@ For example, think of an autonomous helicopter. The reward function is going to 
 - positive reward: helicopter flying well $+1$;
 - negative reward: helicopter flying poorly/crushes $-1000$.
 
+*Note: in reinforcement learning, if you take some hyperparameters not as good, then the model will actually take much more time to train than in supervised learning.*
+
 ## Terminology
 
 - $s=$ state.
@@ -119,6 +121,34 @@ Most system can be in continious number of states/positions (such as system loca
 For example, for a car, the state might include 6 numbers: $x$ position, $y$ position, $\theta$ orientation (where it faces), $\dot{x}$ how quickly $x$ coordinate changing, $\dot{y}$ how quickly $y$ coordinate changing, $\dot{\theta}$ how quickly angle of a car changing. Each number here can take any value of a valid number range.
 
 For an autonomous helicopter, we will have 12 numbers associating the state of the system: $x, y, z,$ $\phi$ (row), $\theta$ (pitch), $\omega$ (yaw), $\dot{x}, \dot{y}, \dot{z}, \dot{\phi}, \dot{\theta}, \dot{\omega}$.
+
+## Learning State-action Value Function | Deep $Q$ Network
+
+When starting building $Q(s,a)$ it is obvious you don't know which action leads to the best possible reward. So, when calculating $Q(s,a)$ first actions can be taken randomly. The algorithm will work nonetheless. In every step, $Q$ will be some random guess. It'll get better over time what the actual $Q$ function is. By building $Q(s,a)$ table you actually create a dataset for the supervised learning algorithm.
+
+First, you are in a state $s_1$. You take some action $a_1$ and end up getting reward $R(s_1)$ and in state $s'_1$. So, you created first training example: $x_1 = (s_1, a_1), y_1 = R(s_1) + \gamma max_{a'}Q(s_1', a')$. Remember, we don't know what next action $a'$ to take, so we will take it randomly.
+
+Here is the full learning algorithm:
+
+1. Initialize neural network randomly as guess of $Q(s,a)$. The algorithm will then improve its parameters to get better estimate.
+2. Repeat {
+   1. Take actions (randomly) in the lunar lander. You will get a lot of data $(s, a, R(s), s')$.
+   2. Store $n$ (e.g. $10000$) most recent $(s, a, R(s), s')$ tuples. Remembering $10000$ most recent tries is just to make sure not to use excessive memory. This technique is called **Replay Buffer**.
+   3. Train neural network:
+      1. Create training set of $1000$ (**mini-batching**) examples using $x = (s, a)$ and $y = R(s) + \gamma max_{a'}Q(s', a')$. $Q(s', a')$ may not be the best guess, but it is a guess, created from previously storing $10000$ tries.
+      2. Train $Q_{new}$ such that $Q_{new}(s,a) \approx y$. This neural network $Q_{new}$ should be a slightly better estimates of what the $Q$ function or the state action value function should be. 
+      3. Set $Q = Q_{new}$ by using **Soft Update** technique. With this technique, you set parameters $w$ and $b$ as follows:
+           - $w = 0.01 w_{new} + 0.99w$
+           - $b = 0.01 b_{new} + 0.99b$
+
+            $0.01$ and $0.99$ control how aggressively you move parameters to parameters of the newly trained model. This is done, because sometimes new models turn out to be worse than previously trained models and we don't want to take steps back. **Soft update** method causes the reinforcement learning algorithm to converge more reliably. It makes it less likely that the reinforcement learning algorithm will oscillate or divert or have other undesirable properties.
+
+It turns out that if you run this algorithm where you start with a really random guess of the $Q$ function, then use Bellman's equations to repeatedly try to improve the estimates of the $Q$ function, and by doing this over and over, taking lots of actions, training a model, that will improve your guess for the $Q$ function. For the next model you train, you now have a slightly better estimate of what is the $Q$ function. Then the next model you train will be even better when you update $Q$ equals $Q_{new}$. For the next time you train a model $Q(s', a')$ will be an even better estimate. As you run this algorithm on every iteration, $Q(s', a')$ hopefully becomes an even better estimate of the $Q$ function so that when you run the algorithm long enough, this will actually become a pretty good estimate of the true value of $Q(s, a)$ so that you can then use this to pick, hopefully good actions for the MTP.
+
+## Deep $Q$ Network Refinements
+
+- At the last layer in the network, output all possible actions corresponding to the current state. For example, if you have 4 total actions, then the last dense layer will have 4 neurons.
+- **$\epsilon-$ greedy Policy**: $\epsilon-$ greedy policy helps to pick best actions even during actions learning. What most people do, is to with probability of $0.95$ pick the action that maximizes $Q(s,a)$, and with probability $0.05$ pich an action $a$ randomly. This way, you will explore greater number of possible actions and their rewards. Because of the random initialization, if the neural network somehow initially gets stuck in the mind that some things are bad idea, just by chance, it means that it will never try out some actions and discover that maybe is actually a good idea to take these actions. With small chance of taking actions randomly, the neural network can learn to overcome its own possible preconceptions about what might be a bad idea that turns out not to be the case. Random step is called **Exploration**. Step maximizing $Q(s,a)$ is called **Greedy** or **Exploitation**. Combination of these two steps is called **$\epsilon-$ greedy policy** ($\epsilon =$ 0.05 or some other number). Another trick with this policy is to gradually decrease $\epsilon$, starting with high value, so that you take more random actions at first and more actions that actually maximize $Q(s,a)$ later.
 
 ## Applications
 
