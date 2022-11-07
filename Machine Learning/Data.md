@@ -41,3 +41,13 @@ By raising prediction threshold in skewed datasets, you end up with higher preci
 If you want to avoid missing too many cases of, e.g., rare disease, then, when in doubt, predict $y=1$, so you should lower your threshold to, for instance, $0.3$, so that you don't leave patients untreated.
 
 When lowering prediction threshold, you end up with lower precision, but higher recall.
+
+## Mini-batching
+
+Mini-batching is a technique, where on every step gradient descent step, instead of using all data examples, we would pick some subset, e.g. 1,000 or $m'$ examples to update model parameters. The inner term of updating parameters $w$ becomes $w=w-\alpha \frac{\partial}{\partial w}\frac{1}{2m'}\sum^{m'}_{i=1}(f_{w,b}(x^{(i)} - y^{(i)})^2$ (example with the squared error loss function). Now each iteration through gradient descent requires looking only at the $m'$ rather than $m$ examples, and every step takes much less time and just leads to a more efficient algorithm.
+
+![image](https://user-images.githubusercontent.com/73081144/200239253-8baf5096-1803-4c72-a97e-2bb61ea30652.png)
+
+*Fig. 3. Mini-batch learning.*
+
+On average, mini-batch gradient descent will tend toward the global minimum, not reliably and somewhat noisily, but every iteration is much more computationally inexpensive and so mini-batch learning or mini-batch gradient descent turns out to be a much faster algorithm when you have a very large training set.
