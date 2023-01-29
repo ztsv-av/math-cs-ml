@@ -2,7 +2,6 @@
 
 ## Creational Design Patterns
 
-
 1. Abstract factory: Provides an interface for creating families of related or dependent objects without specifying their concrete classes. Clients only have to commit to an interface (method call) defined by an abstract class, not a particular concrete class. An example would be an application that is written to use GUI widgets, like a scrollbar or a textbox for the Motif look and feel. It could also be used for a program manager look and feel. The client makes the call for the scrollbar, and under the covers, the abstract widget factory supplies the appropriate widget: a scrollbar.
 2. Builder: Separates the construction of a complex object from its representation so that the same construction process can create different representations. An RTFReader class has a TextConverter object, which has a number of different implementations. One implementation is an ASCIITextConverter, while another might be UnicodeTextConverter. Each kind of converter is separate from the more complex converter, which is responsible for parsing an RTF document.
 3. Factory method: Defines an interface for creating an object but lets subclasses decide which class to instantiate. Factory methods let a class defer instantiation to subclasses. A framework of applications creates applications with different implementations. A drawing application, which creates drawing documents as well as a spreadsheet application, could be an implementation of the same application framework.

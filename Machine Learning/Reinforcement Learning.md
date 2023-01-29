@@ -145,6 +145,47 @@ Here is the full learning algorithm:
 
 It turns out that if you run this algorithm where you start with a really random guess of the $Q$ function, then use Bellman's equations to repeatedly try to improve the estimates of the $Q$ function, and by doing this over and over, taking lots of actions, training a model, that will improve your guess for the $Q$ function. For the next model you train, you now have a slightly better estimate of what is the $Q$ function. Then the next model you train will be even better when you update $Q$ equals $Q_{new}$. For the next time you train a model $Q(s', a')$ will be an even better estimate. As you run this algorithm on every iteration, $Q(s', a')$ hopefully becomes an even better estimate of the $Q$ function so that when you run the algorithm long enough, this will actually become a pretty good estimate of the true value of $Q(s, a)$ so that you can then use this to pick, hopefully good actions for the MTP.
 
+We call this neural network a $𝑄 -Network$ and it can be trained by adjusting its weights at each iteration to minimize the mean-squared error in the Bellman equation.
+
+Unfortunately, using neural networks in reinforcement learning to estimate action-value functions has proven to be highly unstable. Luckily, there's a couple of techniques that can be employed to avoid instabilities. These techniques consist of using a **Target Network** and **Experience Replay**.
+
+### Target Network
+
+We can train the $Q$-Network by adjusting it's weights at each iteration to minimize the mean-squared error in the Bellman equation, where the target values are given by:
+
+$$
+y = R + \gamma \max_{a'}Q(s',a';w)
+$$
+
+where $w$ are the weights of the $Q$-Network. This means that we are adjusting the weights $w$ at each iteration to minimize the following error:
+
+$$
+\overbrace{\underbrace{R + \gamma \max_{a'}Q(s',a'; w)}_{\rm {y~target}} - Q(s,a;w)}^{\rm {Error}}
+$$
+
+Notice that this forms a problem because the $y$ target is changing on every iteration. Having a constantly moving target can lead to oscillations and instabilities. To avoid this, we can create
+a separate neural network for generating the $y$ targets. We call this separate neural network the **target $\hat Q$-Network** and it will have the same architecture as the original $Q$-Network. By using the target $\hat Q$-Network, the above error becomes:
+
+$$
+\overbrace{\underbrace{R + \gamma \max_{a'}\hat{Q}(s',a'; w^-)}_{\rm {y~target}} - Q(s,a;w)}^{\rm {Error}}
+$$
+
+where $w^-$ and $w$ are the weights the target $\hat Q$-Network and $Q$-Network, respectively.
+
+In practice, we will use the following algorithm: every $C$ time steps we will use the $\hat Q$-Network to generate the $y$ targets and update the weights of the target $\hat Q$-Network using the weights of the $Q$-Network. We will update the weights $w^-$ of the the target $\hat Q$-Network using a **soft update**. This means that we will update the weights $w^-$ using the following rule:
+ 
+$$
+w^-\leftarrow \tau w + (1 - \tau) w^-
+$$
+
+where $\tau\ll 1$. By using the soft update, we are ensuring that the target values, $y$, change slowly, which greatly improves the stability of our learning algorithm.
+
+### Experience Replay
+
+When an agent interacts with the environment, the states, actions, and rewards the agent experiences are sequential by nature. If the agent tries to learn from these consecutive experiences it can run into problems due to the strong correlations between them. To avoid this, we employ a technique known as **Experience Replay** to generate uncorrelated experiences for training our agent. Experience replay consists of storing the agent's experiences (i.e the states, actions, and rewards the agent receives) in a memory buffer and then sampling a random mini-batch of experiences from the buffer to do the learning. The experience tuples $(S_t, A_t, R_t, S_{t+1})$ will be added to the memory buffer at each time step as the agent interacts with the environment.
+
+By using experience replay we avoid problematic correlations, oscillations and instabilities. In addition, experience replay also allows the agent to potentially use the same experience in multiple weight updates, which increases data efficiency.
+
 ## Deep $Q$ Network Refinements
 
 - At the last layer in the network, output all possible actions corresponding to the current state. For example, if you have 4 total actions, then the last dense layer will have 4 neurons.
