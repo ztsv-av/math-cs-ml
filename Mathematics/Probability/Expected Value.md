@@ -1,3 +1,5 @@
+# Expected Value
+
 Expected value, also known as the mean or average, is a fundamental concept in probability theory and statistics that represents the long-term average value of a random variable. It is a measure of the central tendency of a probability distribution.
 
 The expected value of a discrete random variable X is calculated as the sum of the product of each possible value of X and its probability, and can be represented by the formula:

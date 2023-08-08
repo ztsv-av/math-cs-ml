@@ -1,17 +1,19 @@
+# Covariance
+
 Covariance is a statistical measure that indicates the degree to which two variables are linearly associated. It measures how much the two variables change together. A positive covariance indicates that the two variables tend to increase or decrease together, while a negative covariance indicates that one variable tends to increase when the other decreases.
 
 The formula for covariance is:
 
-$$cov(X,Y) = \frac{\sum[(x_i - \bar{x})(y_i - \bar{y})]}{n - 1}$$
+$$cov(X,Y) = \frac{\sum[(x_i - \bar{X})(y_i - \bar{Y})]}{n - 1}$$
 
 where:
 
 - $cov(X,Y)$ is the covariance between X and Y
 - $\sum$ is the sum of
 - $x_i$ is the ith observation in the X dataset
-- $\bar{x}$ is the mean of X
+- $\bar{X}$ is the mean of X
 - $y_i$ is the ith observation in the Y dataset
-- $\bar{y}$ is the mean of Y
+- $\bar{Y}$ is the mean of Y
 - $n$ is the number of observations in the datasets
 
 To compute covariance, follow these steps:

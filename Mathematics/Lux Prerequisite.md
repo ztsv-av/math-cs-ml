@@ -76,3 +76,19 @@ $P = [v_1 v_2 ... v_d][v_1 v_2 ... v_d]^{-1}$
 where $[v_1 v_2 ... v_d]$ is a $d x d$ matrix whose columns are the vectors $v_1, v_2, ..., v_d$, and $[v_1 v_2 ... v_d]^{-1}$ is the inverse of this matrix, which exists since the vectors are linearly independent.
 
 To use this projection matrix to project a vector $x$ onto the subspace $V$, we simply compute the product $Px$, which gives us the orthogonal projection of $x$ onto $V$.
+
+
+## Do you know that symmetric matrices can be diagonalized? Would you be able to compute their eigenvalues and their eigenvectors?
+
+Symmetric matrix is symmetric along its diagonal, meaning $A^T = A$. Properties:
+- real eigenvalues;
+- eigenvectors corresponding to the eigenvalues  that are orthogonal;
+- must be diagonazible.
+
+A matrix that is diagonalizable means there exists a diagonal matrix $D$ whose diagonal entries are the eigenvalues of A (all the entries outside of the diagonal are zeros), such that $P^{-1}AP = D$, where $P$ is an invertible real orthogonal matrix. We can also say that a matrix is diagonalizable if the matrix can be written in the form $A = PDP^{-1}$.
+
+
+## Eigenvalues and eigenvectors
+
+The eigenvectors of matrix A are the vectors whose directions don’t change after A is applied to it. The direction is not changed, but the vectors can be scaled. This shows the non-triviality of this property. Real eigenvalues indicate stretching or scaling in the linear transformation, unlike complex eigenvalues, which don’t have a “size.”
+The set of all the eigenvalues of a matrix is called a spectrum.

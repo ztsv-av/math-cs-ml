@@ -6,6 +6,32 @@ There are different types of correlation measures, but one of the most commonly 
 
 Correlation does not necessarily imply causation, as a correlation between two variables can arise from a variety of factors, including chance. Therefore, it is important to carefully interpret the meaning of the correlation coefficient and to consider other factors that may be influencing the relationship between the variables.
 
+---
+
+Pearson correlation formula:
+
+
+$$r = \frac{\sum[(x_i - \bar{X})(y_i - \bar{Y})]}{\sqrt{\sum[(x_i - \bar{X})²] * \sum[(y_i - \bar{Y})²]}}$$
+
+In this formula:
+
+- $x_i$ and $y_i$ represent the individual values of the variables X and Y, respectively.
+- \bar{X} and \bar{Y} represent the means (averages) of X and Y, respectively.
+- $\sum$ represents the summation symbol, indicating that you should sum up the values for all data points in the dataset.
+
+---
+
+$$r = \frac{cov(X, Y)}{\sigma X * \sigma Y}$$
+
+In this formula:
+
+- $r$ is the Pearson correlation coefficient
+- $cov(X,Y)$ is the covariance between X and Y
+- $\sigma X$ is the standard deviation of X
+- $\sigma Y$ is the standard deviation of Y
+
+
+
 ## Coefficient of Correlation
 
 The coefficient of correlation, also known as the correlation coefficient, is a statistical measure that expresses the strength and direction of the relationship between two variables. In other words, it is a measure of how much two variables are related to each other.

@@ -1,8 +1,10 @@
+# Bayes' Theorem
+
 Bayes' theorem is a fundamental concept in probability theory that allows us to calculate the probability of a hypothesis given some observed evidence. It is named after Reverend Thomas Bayes, an 18th-century British statistician and theologian who first formulated the theorem.
 
 Bayes' theorem states that the probability of a hypothesis H given some observed evidence E can be calculated as:
 
-$$P(H | E) = P(E | H) * P(H) / P(E)$$
+$$P(H | E) = \frac{P(E | H) * P(H)}{P(E)}$$
 
 where:
 

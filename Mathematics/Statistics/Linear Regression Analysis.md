@@ -1,3 +1,5 @@
+# Linear Regression
+
 Linear regression analysis is a statistical method used to model the relationship between a dependent variable Y and one or more independent variables X. In simple linear regression, we use one independent variable to predict the dependent variable, while in multiple linear regression, we use two or more independent variables.
 
 The basic idea of linear regression is to find the line (in simple linear regression) or hyperplane (in multiple linear regression) that best fits the data, by minimizing the sum of the squared errors between the predicted values and the actual values of the dependent variable.
