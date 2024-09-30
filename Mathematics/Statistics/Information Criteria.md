@@ -27,10 +27,13 @@ $$g(k,T)=\frac{2k}{T}$$
 $$g(k, T) = \frac{k\log{T}}{T}$$
 
 - Good when sample size is small.
+- Imposes a stricter penalty for additional parameters.
 
 3. Hannan-Quinn IC (HIC):
 
 $$g(k, T)=\frac{2k\log{\log{T}}}{T}$$
+
+- Falls between AIC and BIC in terms of how it penalizes complexity.
 
 ## Cautions
 
