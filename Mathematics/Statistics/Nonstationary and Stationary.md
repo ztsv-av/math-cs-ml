@@ -18,6 +18,10 @@ For forecasting purposes (FCS), you can continue to use the series in its origin
 
 ### ADF (Augmented Dickey-Fuller)
 
+**If we can model something with a random walk, that means that the data is not stationary.**
+
+$$y_t = r\cdot y_{t-1} + \epsilon_t \text{(goes up because of r coeff., e.g. 1\% increase)}$$
+
 $$H_0: \text{The time series has a unit root (is non-stationary)}$$
 
 If the null hypothesis is **rejected** (i.e., the **p-value is less than the chosen significance level**, such as 
@@ -30,3 +34,36 @@ The null hypothesis in the KPSS (Kwiatkowski-Phillips-Schmidt-Shin) test is the 
 $$H_0: \text{The time series is stationary}$$
 
 If the null hypothesis is **rejected** (i.e., the **p-value is less than the chosen significance level**), the test implies that the series is **non-stationary**.
+
+### DF-GLS (Dickey-Fuller Generalized Least Squares) Test
+
+The **DF-GLS test** is an improvement of the **ADF (Augmented Dickey-Fuller)** test. It follows a similar idea but makes the test more powerful by first **detrending** the data.
+
+- **ADF test** directly estimates the model without any transformation of the data.
+- **DF-GLS** first **detrends** the data (i.e., removes any deterministic trend) before performing the unit root test. This detrending helps improve the power of the test, especially when the series has a trend.
+
+#### DF-GLS Model
+
+Before testing for the unit root, the time series is transformed by subtracting its estimated trend, making the data closer to stationary:
+
+$$
+y_t^{detrended} = y_t - \text{Trend component}
+$$
+
+Then the DF-GLS test applies the same principle as the ADF test but on the **detrended** data:
+
+$$
+y_t^{detrended} = r \cdot y_{t-1}^{detrended} + \epsilon_t
+$$
+
+Where $y_t^{detrended}$ is the time series after removing the trend.
+
+#### Null Hypothesis $H_0$
+- $H_0$: The series has a **unit root** (is non-stationary).
+  
+If the **null hypothesis is rejected** (i.e., the p-value is less than a chosen significance level, like 1%, 5%, or 10%), it means the series is stationary after removing the trend.
+
+#### Key Points
+1. **DF-GLS** is more powerful than the ADF test when the series has a trend because it first removes the trend before testing for stationarity.
+2. Like the ADF test, the DF-GLS test also has the null hypothesis that the series is **non-stationary** (has a unit root).
+3. **If you reject the null hypothesis**, it means the series is **stationary** (without a unit root), even after accounting for any deterministic trends.
