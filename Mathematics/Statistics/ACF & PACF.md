@@ -14,8 +14,8 @@
 
 - General Guidelines for Model Selection:
     - AR(p) Model:
-        1. The PACF shows a sharp cut-off after lag p (partial correlations drop to near zero after this point).
-        2. The ACF decays slowly over time.
+        1. The ACF decays slowly over time.
+        2. The PACF shows a sharp cut-off after lag p (partial correlations drop to near zero after this point).
     - MA(q) Model:
         1. The ACF shows a sharp cut-off after lag q.
         2. The PACF decays slowly over time.

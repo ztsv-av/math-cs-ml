@@ -77,3 +77,12 @@ e = y - y_hat
 
 Since the model's residuals exhibit significant autocorrelation at lags $2$ through $4$, this implies that the current $\text{ARIMA}(1, 0, 1)$ model may not fully capture the time dependencies in the data.
 
+## Model Steps
+
+1. Test stationarity (ADF, KPSS).
+    - Not stationary $\to$ take difference / calculate growth rates.
+2. Select appropriate lags $(p, q)$.
+    - Use AC / PAC / IC / Inspect neighboring models.
+3. Model validation.
+    - Check if errors are white noise or not. If so, model needs improvement.
+4. Forecasting.
