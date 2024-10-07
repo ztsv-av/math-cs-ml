@@ -43,7 +43,7 @@ If **underfitted**, tests will show that the **residuals** are not uncorrelated,
 2. Ljung-Box Test for Residual Autocorrelation:
     - Ljung-Box (L1) (Q): The test statistic is 0.90 with a p-value of 0.34. Since the p-value is greater than 0.05, we fail to reject the null hypothesis of no autocorrelation in the residuals. This suggests that the model has sufficiently captured the time dependencies in the data, and there is no significant autocorrelation in the residuals.
 3. Jarque-Bera Test for Normality:
-    - Jarque-Bera (JB): The test statistic is 2.13 with a p-value of 0.35. Since the p-value is greater than 0.05, we fail to reject the null hypothesis that the residuals are normally distributed. This indicates that the residuals do not show significant deviations from normality. **In this test, skew should be close to 0.**
+    - Jarque-Bera (JB): The test statistic is 2.13 with a p-value of 0.35. Since the p-value is greater than 0.05, we fail to reject the null hypothesis that the residuals are normally distributed. This indicates that the residuals do not show significant deviations from normality. **In this test, skew should be close to 0.**. Kurtosis is how flat the normal distribution is. Skew is how "pushed" to the side the distribution is, i.e. how fat the tail is.
 4. Heteroskedasticity Test:
     - Heteroskedasticity (H): The H-statistic is 1.05 with a p-value of 0.63. Since the p-value is greater than 0.05, we fail to reject the null hypothesis that the residuals have constant variance (i.e., no heteroscedasticity). This suggests that the residuals have constant variance over time (homoscedasticity).
 5. Null Hypotheses and Consequences:
