@@ -21,3 +21,7 @@
         2. The PACF decays slowly over time.
     - ARMA(p,q) Model:
         1. Both the ACF and PACF tail off gradually, indicating a mixture of AR and MA components.
+
+So:
+- Cut off at lag $p$: use lag $p$ for the model.
+- If something is a bit significant after some lags, we ignore it.
