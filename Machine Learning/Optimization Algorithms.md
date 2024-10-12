@@ -79,3 +79,50 @@ The intuition behind the Adam algorithm is, if a parameter $w_j$, or $b$ seems t
 ![image](https://user-images.githubusercontent.com/73081144/191167193-3ef8b385-6b69-4e93-9c65-32bb17eb497c.png)
 
 *Fig. 7. Adam intuition.*
+
+The method combines the advantages of two popular optimization methods:
+
+1. **AdaGrad**: Known for its ability to handle **sparse gradients**, which means it adjusts the learning rate for each parameter individually, allowing for larger updates on infrequent features and smaller updates on frequently occurring features. This is particularly useful in scenarios where the data has sparse or infrequent features, such as natural language processing or recommendation systems.
+
+2. **RMSProp**: Known for its ability to handle **non-stationary objectives**, meaning it adapts the learning rate over time to deal with changes in the optimization landscape. RMSProp does this by maintaining a moving average of the squared gradients, which allows it to adjust the learning rate dynamically, preventing overly aggressive updates when gradients vary rapidly and allowing for smoother convergence.
+
+By combining these two methods, the optimizer can effectively manage both **sparse gradients** (like AdaGrad) and **non-stationary objectives** (like RMSProp), making it versatile and well-suited for a wide range of machine learning tasks.
+
+### Algorithm
+
+- $g_t^2$ indicates the element-wise square $g_t \cdot g_t$. 
+- Good default settings for the tested machine learning problems are $\alpha = 0.001$, $\beta_1 = 0.9$, $\beta_2 = 0.999$, and $\epsilon = 10^{-8}$. 
+- All operations on vectors are element-wise. 
+- With $\beta_1^t$ and $\beta_2^t$, we denote $\beta_1$ and $\beta_2$ raised to the power $t$.
+
+**Require**:  
+- $\alpha$: Stepsize  
+- $\beta_1, \beta_2 \in [0, 1)$: Exponential decay rates for the moment estimates  
+- $f(\theta)$: Stochastic objective function with parameters - $\theta$  
+- $\theta_0$: Initial parameter vector
+
+---
+
+**Initialize**:  
+$m_0 \leftarrow 0$ (Initialize 1st moment vector)  
+$v_0 \leftarrow 0$ (Initialize 2nd moment vector)  
+$t \leftarrow 0$ (Initialize timestep)
+
+---
+
+**while** $\theta_t$ not converged **do**  
+&nbsp;&nbsp;&nbsp;&nbsp;$t \leftarrow t + 1$  
+&nbsp;&nbsp;&nbsp;&nbsp;$g_t \leftarrow \nabla_\theta f_t(\theta_{t-1})$ (Get gradients w.r.t. stochastic objective at timestep $t$)  
+&nbsp;&nbsp;&nbsp;&nbsp;$m_t \leftarrow \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot g_t$ (Update biased 1st moment estimate, exponential moving average)  
+&nbsp;&nbsp;&nbsp;&nbsp;$v_t \leftarrow \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot g_t^2$ (Update biased 2nd raw moment estimate, exponential moving average)  
+&nbsp;&nbsp;&nbsp;&nbsp;$\hat{m}_t \leftarrow m_t / (1 - \beta_1^t)$ (Compute bias-corrected 1st moment estimate) **NOTE**  
+&nbsp;&nbsp;&nbsp;&nbsp;$\hat{v}_t \leftarrow v_t / (1 - \beta_2^t)$ (Compute bias-corrected 2nd raw moment estimate) **NOTE**  
+&nbsp;&nbsp;&nbsp;&nbsp;$\theta_t \leftarrow \theta_{t-1} - \alpha \cdot \hat{m}_t / (\sqrt{\hat{v}_t} + \epsilon)$ (Update parameters)
+
+**end while**
+
+---
+
+**return** $\theta_t$ (Resulting parameters)
+
+**NOTE** The purpose of bias correction in Adam is to adjust the estimates of the first and second moments (mean and variance of the gradients) because, early in training, these estimates are biased toward zero due to the initial values of the moments. Bias correction is used to reduce the variance of the gradients in Adam. The first and the second moment estimates are initialized with 0's, which makes them zero-biased. By applying bias correction, the algorithm ensures that the moment estimates are more accurate, particularly in the early stages of training when $t$ is small.
