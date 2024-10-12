@@ -126,3 +126,77 @@ $t \leftarrow 0$ (Initialize timestep)
 **return** $\theta_t$ (Resulting parameters)
 
 **NOTE** The purpose of bias correction in Adam is to adjust the estimates of the first and second moments (mean and variance of the gradients) because, early in training, these estimates are biased toward zero due to the initial values of the moments. Bias correction is used to reduce the variance of the gradients in Adam. The first and the second moment estimates are initialized with 0's, which makes them zero-biased. By applying bias correction, the algorithm ensures that the moment estimates are more accurate, particularly in the early stages of training when $t$ is small.
+
+## AdamW (Decoupled Weight Decay)
+
+AdamW (Adam with Weight Decay) improves upon the original Adam optimizer by addressing a subtle but impactful issue with how weight decay is handled in Adam.
+
+- Decouples weight decay and learning rate when updating model parameters $\to$ simplifies the problem of hyperparameter tuning in SGD and improves Adam's perfomance.
+- The decoupling in AdamW provides more consistent and reliable regularization. In Adam, the regularization strength is modulated by both the learning rate and weight decay, which can lead to unpredictable effects. By separating these, AdamW can control regularization more directly and effectively, preventing overfitting without unnecessarily penalizing gradient-based learning.
+- In Adam, weight decay being mixed with the gradient update can cause weights to drift over time. This drift comes from the fact that L2 regularization in Adam is actually applied to the moving average of the gradients. This may cause the weights to move in undesired directions, especially in deep networks, negatively impacting the model's ability to generalize. AdamW prevents this drift by applying weight decay directly to the weights, ensuring the decay behaves as intended. This leads to better generalization, especially in large-scale tasks like deep learning.
+- Due to the proper application of weight decay and more controlled learning rate dynamics, AdamW leads to better generalization. It helps models avoid overfitting on training data, especially when dealing with large models or small datasets.
+
+Adam computes an adaptive learning rate based on estimates of first and second moments of the gradients. The weight decay in Adam is effectively treated as an additional component in the gradient calculation:
+
+$$g_t=\nabla L(\theta_t)+\lambda \theta_t$$
+- $g_t$ is the modified gradient,
+- $\nabla L(\theta_t)$ is the gradient of the loss function w.r.t. to the paramters $\theta_t$
+- $\lambda \theta_t$ is the L2 regularization term (weight decay applied as part of the gradient).
+
+### Algorithm (with L2)
+
+Given:
+- Learning rate: $\alpha$
+- Weight decay coefficient: $\lambda$
+- Exponential decay rates for moment estimates: $\beta_1, \beta_2$
+- Small constant for numerical stability: $\epsilon$
+
+Initialize:
+- Initial parameters: $\theta_0$
+- First moment vector: $m_0 = 0$
+- Second moment vector: $v_0 = 0$
+- Time step: $t = 0$
+- Schedule multiplier $\mu_{t=0}\in\mathbb{R}$
+
+Repeat for each iteration:
+
+1. Increment time step: $t = t + 1$
+
+2. Compute the gradient of the loss function w.r.t. parameters: 
+$$
+   g_t = \nabla L(\theta_{t-1}) + \lambda\theta_{t-1}
+$$
+
+3. Update biased first moment estimate:
+$$
+   m_t = \beta_1 \cdot m_{t-1} + (1 - \beta_1) \cdot g_t
+$$
+
+4. Update biased second moment estimate:
+$$
+   v_t = \beta_2 \cdot v_{t-1} + (1 - \beta_2) \cdot g_t^2
+$$
+
+5. Compute bias-corrected first moment estimate:
+$$
+   \hat{m}_t = \frac{m_t}{1 - \beta_1^t}
+$$
+
+6. Compute bias-corrected second moment estimate:
+$$
+   \hat{v}_t = \frac{v_t}{1 - \beta_2^t}
+$$
+
+7. Set schedule multiplier:
+$$
+  \mu_t = \text{SetScheduleMultiplier}(t)
+$$
+
+8. Update parameters:
+$$
+   \theta_{t} = \theta_{t-1} - \mu_t\left(\alpha \cdot \frac{\hat{m}_t}{\sqrt{\hat{v}_t} + \epsilon}+\lambda\theta_{t-1}\right)
+$$
+
+Repeat until convergence.
+
+## AdamWR (Decoupled Weight Decay + Warm Restarts)
