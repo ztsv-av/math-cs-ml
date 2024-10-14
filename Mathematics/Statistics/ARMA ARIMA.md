@@ -86,3 +86,28 @@ Since the model's residuals exhibit significant autocorrelation at lags $2$ thro
 3. Model validation.
     - Check if errors are white noise or not. If so, model needs improvement.
 4. Forecasting.
+
+
+# Auto ARIMA
+
+Auto ARIMA simplifies the process by automatically determining the best parameters for **p**, **d**, and **q** using statistical techniques like grid search and minimizing information criteria such as **AIC** (Akaike Information Criterion) or **BIC** (Bayesian Information Criterion).
+
+## Key Features of Auto ARIMA
+
+- **Automated Parameter Selection**: Auto ARIMA performs a grid search to find the best combination of **p**, **d**, and **q** based on the provided data.
+- **Stationarity Check**: It checks whether the data is stationary and automatically applies differencing if necessary.
+- **Seasonal Adjustment**: Auto ARIMA can handle seasonal time series by automatically adjusting for seasonality (SARIMA).
+- **Model Selection**: The model with the lowest AIC or BIC score is chosen as the best fit.
+
+## Benefits
+
+- **Simplicity**: Auto ARIMA removes the need for manual tuning, making it easier for non-experts to use.
+- **Optimization**: It finds the best-fitting model faster by automating parameter search and reducing the risk of overfitting.
+- **Flexibility**: Auto ARIMA can handle a wide range of time series data, including non-stationary and seasonal data.
+
+## How Auto ARIMA Works
+
+1. **Check for Stationarity**: If the time series is not stationary, differencing is applied (handles the `d` parameter).
+2. **Parameter Search**: It searches through combinations of AR (`p`) and MA (`q`) terms using grid search.
+3. **Model Selection**: Each model is evaluated using AIC or BIC, and the model with the lowest score is selected.
+4. **Fit the Model**: Once the best parameters are found, Auto ARIMA fits the ARIMA model to the data.
