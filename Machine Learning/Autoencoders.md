@@ -146,3 +146,7 @@ def vae_model(encoder, decoder, input_shape):
     return model
 
 ```
+
+### Vector-Quantized Variational Auto-Encoders
+
+State of the art. TODO
