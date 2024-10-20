@@ -9,7 +9,7 @@ In gradient descent with momentum, the update rule for the parameters at step $t
 
 1. **Update the velocity term (momentum)**:
    $$v_t = \beta \cdot v_{t-1} + (1 - \beta) \cdot g_t$$
-   Where:
+   where:
    - $v_t$ is the velocity (or momentum) at timestep $t$.
    - $\beta$ is the momentum coefficient (typically a value close to 1, e.g., 0.9).
    - $g_t$ is the gradient of the loss function at timestep $t$.
@@ -17,7 +17,7 @@ In gradient descent with momentum, the update rule for the parameters at step $t
 
 2. **Update the parameters**:
    $$\theta_t = \theta_{t-1} - \alpha \cdot v_t$$
-   Where:
+   where:
    - $\theta_t$ are the model parameters at timestep $t$.
    - $\alpha$ is the learning rate.
 
