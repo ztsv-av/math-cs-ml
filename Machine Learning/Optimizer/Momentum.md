@@ -8,9 +8,7 @@ When updating model parameters, standard gradient descent takes steps proportion
 In gradient descent with momentum, the update rule for the parameters at step $t$ looks like this:
 
 1. **Update the velocity term (momentum)**:
-   $$
-   v_t = \beta \cdot v_{t-1} + (1 - \beta) \cdot g_t
-   $$
+   $$v_t = \beta \cdot v_{t-1} + (1 - \beta) \cdot g_t$$
    Where:
    - $v_t$ is the velocity (or momentum) at timestep $t$.
    - $\beta$ is the momentum coefficient (typically a value close to 1, e.g., 0.9).
@@ -18,9 +16,7 @@ In gradient descent with momentum, the update rule for the parameters at step $t
    - $v_{t-1}$ is the previous velocity.
 
 2. **Update the parameters**:
-   $$
-   \theta_t = \theta_{t-1} - \alpha \cdot v_t
-   $$
+   $$\theta_t = \theta_{t-1} - \alpha \cdot v_t$$
    Where:
    - $\theta_t$ are the model parameters at timestep $t$.
    - $\alpha$ is the learning rate.
