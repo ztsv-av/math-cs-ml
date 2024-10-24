@@ -111,3 +111,13 @@ Auto ARIMA simplifies the process by automatically determining the best paramete
 2. **Parameter Search**: It searches through combinations of AR (`p`) and MA (`q`) terms using grid search.
 3. **Model Selection**: Each model is evaluated using AIC or BIC, and the model with the lowest score is selected.
 4. **Fit the Model**: Once the best parameters are found, Auto ARIMA fits the ARIMA model to the data.
+
+# Seasonal ARIMA
+
+The only difference to model seasonality is to add a lag of the same month from previous year (or 2 lags from previous year, use AIC to choose).
+
+$$y_t = \theta_{11}y_{t-1}+\theta_{21}y_{t-12}+\theta_{12}\theta_{21}y_{t-13}+\epsilon_t$$
+
+Or we can take yearly first difference and compute ARIMA. This way, we assume that $\theta_{21}=1$:
+
+$$\tilde{y_t}=y_t-y_{t_{12}}$$

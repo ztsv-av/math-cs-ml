@@ -72,5 +72,7 @@ If `IR` blows up, it takes one $t$ (next timestamp) to impact `inflation` and `r
 
 What share of forecast error variance for horizon `h` is due to uncertainty driven by a specific shock. There we compute matrix $\Psi$. $\Psi_{h_{it}}$ element of resulting matrix represents the contribution of $j$-th variable in explaining the $h$-step ahead forecast error variance for $i$-th variable $y_i$.
 
+Use **Forecast Error Decomposition** plots to understand which variable are more important to model.
+
 ## Advanced VAR Models
 
